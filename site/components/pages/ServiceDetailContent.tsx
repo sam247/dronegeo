@@ -1,6 +1,5 @@
 import { services, locations, relatedGuideLinksByService, serviceFaqsBySlug } from "@/lib/data";
-import { getHeroImage } from "@/lib/images";
-import { getDroneGalleryImages } from "@/lib/droneStockImages";
+import { getDroneGalleryImages, getHeroStockImage } from "@/lib/droneStockImages";
 import { verticalConfig, partnerBaseUrl, partnerDrainSurveyPath } from "@/config";
 import { ServiceDetailContent as EngineServiceDetailContent } from "engine";
 
@@ -11,7 +10,8 @@ interface ServiceDetailContentProps {
 export default async function ServiceDetailContent({ service }: ServiceDetailContentProps) {
   const symptomLinks = relatedGuideLinksByService[service.slug] ?? [];
   const faqs = serviceFaqsBySlug[service.slug] ?? [];
-  const heroImageSrc = getHeroImage({ serviceSlug: service.slug });
+  const heroStock = await getHeroStockImage(service.slug);
+  const heroImageSrc = heroStock.src;
   const galleryImages = await getDroneGalleryImages(service.slug, 2);
   const isDroneSurveys = service.slug === "drone-surveys";
   const pageConfig = isDroneSurveys
@@ -60,8 +60,8 @@ export default async function ServiceDetailContent({ service }: ServiceDetailCon
       symptomLinksSectionTitle="Related guides"
       faqs={faqs}
       overviewImage={{
-        src: heroImageSrc,
-        alt: isDroneSurveys ? "Aerial survey capture in progress" : `${service.title} – ${verticalConfig.siteName}`,
+        src: heroStock.src,
+        alt: isDroneSurveys ? "Aerial survey capture in progress" : heroStock.alt,
       }}
       firstCtaMessage={
         isDroneSurveys

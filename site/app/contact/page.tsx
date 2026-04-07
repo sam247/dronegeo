@@ -5,6 +5,7 @@ import ContactForm from "@/components/sections/ContactForm";
 import { TrackablePhoneLink, QuoteFormHashHandler } from "engine";
 import { verticalConfig } from "@/config";
 import type { Metadata } from "next";
+import { getContactPageHeroImage } from "@/lib/droneStockImages";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -15,13 +16,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://dronegeo.co.uk/contact" },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const hero = await getContactPageHeroImage();
   return (
     <>
       <QuoteFormHashHandler />
       <SchemaMarkup type="BreadcrumbList" data={{ breadcrumbs: [{ name: "Home", url: "/" }, { name: "Contact", url: "/contact" }] }} />
-      <section className="bg-primary py-16 md:py-24">
-        <div className="container">
+      <section className="relative overflow-hidden bg-primary py-16 md:py-24">
+        <div className="absolute inset-0">
+          <img src={hero.src} alt="" className="h-full w-full object-cover opacity-25" aria-hidden />
+          <div className="absolute inset-0 bg-primary/75" />
+        </div>
+        <div className="container relative">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-4 font-display text-4xl font-bold text-primary-foreground md:text-5xl">Contact Us</h1>
             <p className="text-lg text-primary-foreground/80">Get in touch for a survey quote. We’ll connect you with a qualified survey partner.</p>

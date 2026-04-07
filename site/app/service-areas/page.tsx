@@ -1,5 +1,6 @@
 import { ServiceAreasHub } from "engine";
 import { locations } from "@/lib/data";
+import { firstStockImage } from "@/lib/droneStockImages";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -14,11 +15,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://dronegeo.co.uk/service-areas" },
 };
 
-export default function ServiceAreasPage() {
+export default async function ServiceAreasPage() {
+  const hero = await firstStockImage("drone uk aerial survey regions", 1);
   return (
     <ServiceAreasHub
       primaryServiceSlug={PRIMARY_SERVICE_SLUG}
       locations={locations}
+      heroImageSrc={hero?.src}
       heroTitle="Drone Services Across Core Coverage Areas"
       heroSubtitle="Drone surveys, inspections, thermal imaging and aerial photography in Hertfordshire, London, Buckinghamshire and Bedfordshire."
       introTitle="Coverage by region"

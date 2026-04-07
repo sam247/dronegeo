@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { CheckCircle, Users, Shield, CircleCheck } from "lucide-react";
-import { aboutTeam } from "@/lib/images";
 import { services } from "@/lib/data";
 import { verticalConfig } from "@/config";
 import CTABanner from "@/components/sections/CTABanner";
 import SchemaMarkup from "@/components/seo/SchemaMarkup";
-import { GroupFooter, getServiceUrl } from "engine";
-import { mainlineGroupLinksForSite } from "engine/data/mainline-group";
+import { getServiceUrl } from "engine";
+import { getAboutPageStockImage, firstStockImage } from "@/lib/droneStockImages";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -19,18 +18,25 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://dronegeo.co.uk/about" },
 };
 
-const groupLinks = mainlineGroupLinksForSite(verticalConfig.baseUrl);
 const servicePreview = services.slice(0, 6);
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const aboutImage = await getAboutPageStockImage();
+  const heroBg = await firstStockImage("drone company aerial operations uk", 1);
   return (
     <>
       <SchemaMarkup
         type="BreadcrumbList"
         data={{ breadcrumbs: [{ name: "Home", url: "/" }, { name: "About Us", url: "/about" }] }}
       />
-      <section className="bg-primary py-16 md:py-24">
-        <div className="container">
+      <section className="relative overflow-hidden bg-primary py-16 md:py-24">
+        <div className="absolute inset-0">
+          {heroBg ? (
+            <img src={heroBg.src} alt="" className="h-full w-full object-cover opacity-25" aria-hidden />
+          ) : null}
+          <div className="absolute inset-0 bg-primary/75" />
+        </div>
+        <div className="container relative">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-4 font-display text-4xl font-bold text-primary-foreground md:text-5xl">About DroneGeo</h1>
             <p className="text-lg text-primary-foreground/80">
@@ -54,7 +60,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="aspect-[4/3] overflow-hidden rounded-lg bg-muted">
-              <img src={aboutTeam} alt="DroneGeo team" className="h-full w-full object-cover" />
+              <img src={aboutImage.src} alt={aboutImage.alt} className="h-full w-full object-cover" />
             </div>
           </div>
         </div>
@@ -104,20 +110,6 @@ export default function AboutPage() {
           <p className="text-muted-foreground">
             We work across London, the South East and the wider UK. Use our location pages for local context; contact us to confirm availability for your site.
           </p>
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <div className="container max-w-3xl">
-          <h2 className="mb-4 font-display text-3xl font-bold">Our Service Network</h2>
-          <p className="mb-6 text-muted-foreground">
-            DroneGeo is focused on drone inspections and aerial capture. Related service brands are listed below if your project needs additional specialist support.
-          </p>
-          <GroupFooter
-            items={groupLinks}
-            variant="default"
-            groupLinkUtmSource={verticalConfig.verticalId}
-          />
         </div>
       </section>
 

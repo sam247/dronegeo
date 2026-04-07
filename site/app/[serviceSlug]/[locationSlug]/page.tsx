@@ -1,6 +1,6 @@
 import { notFound, permanentRedirect } from "next/navigation";
 import { services, locations, getRelevantTopicsForService } from "@/lib/data";
-import { getHeroImage } from "@/lib/images";
+import { getHeroStockImage } from "@/lib/droneStockImages";
 import { verticalConfig } from "@/config";
 import {
   LocationPage,
@@ -218,7 +218,7 @@ export default async function LocationRoute({ params }: Props) {
   ];
 
   const otherServices = services.filter((s) => s.id !== service.id);
-  const serviceImage = getHeroImage({ serviceSlug: service.slug });
+  const serviceImage = (await getHeroStockImage(service.slug)).src;
 
   const neighbourIds = getNeighbourLocationIds(location.id, locations.map((l) => l.id));
   const neighbourLocationsForContext = neighbourIds

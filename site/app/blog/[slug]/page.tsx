@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArticleDetailPage } from "engine";
 import { blogPosts, getBlogPostBySlug } from "@/lib/blogData";
 import { verticalConfig } from "@/config";
+import { getBlogArticleStockImage } from "@/lib/droneStockImages";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -29,9 +30,11 @@ export default async function BlogArticlePage({ params }: Props) {
   const article = getBlogPostBySlug(slug);
   if (!article) notFound();
 
+  const hero = await getBlogArticleStockImage(slug);
+
   return (
     <ArticleDetailPage
-      article={article}
+      article={{ ...article, image: hero.src }}
       companyInfo={verticalConfig.companyInfo}
       baseUrl={verticalConfig.baseUrl}
       verticalId={verticalConfig.verticalId}

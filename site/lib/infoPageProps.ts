@@ -4,27 +4,24 @@ import {
   hubPages,
   services,
   locations,
-  categoryImages,
   categoryAltText,
 } from "@/lib/data";
-import { getHeroImage } from "@/lib/images";
+import { getCategoryHubHeroImage } from "@/lib/droneStockImages";
 import { verticalConfig } from "@/config";
 import { buildFeaturedServiceLocationLinks, getServiceUrl, type RelatedPageLink } from "engine";
 import { getL4GuideTargetLinksForServices } from "@/data/l4StrikingDistance";
 
-export function getInfoPageProps(category: string, slug: string) {
+export async function getInfoPageProps(category: string, slug: string) {
   const hub = getHubData(category);
   const pages = getCategoryPages(category);
   const page = pages.find((p) => p.slug === slug);
   if (!hub || !page) return null;
 
   const otherPages = pages.filter((p) => p.slug !== page.slug).slice(0, 4);
-  const heroImage = getHeroImage({
-    category,
-    categoryImagesMap: categoryImages,
-  });
+  const heroStock = await getCategoryHubHeroImage(category);
+  const heroImage = heroStock.src;
   const heroAlt =
-    categoryAltText[category] || `${page.title} - professional survey services`;
+    heroStock.alt || categoryAltText[category] || `${page.title} - professional survey services`;
   const pageFaqs = [
     {
       question: `What are the signs of ${page.title.toLowerCase()}?`,

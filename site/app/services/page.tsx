@@ -6,6 +6,7 @@ import CTABanner from "@/components/sections/CTABanner";
 import SchemaMarkup from "@/components/seo/SchemaMarkup";
 import { getServiceUrl } from "engine";
 import type { Metadata } from "next";
+import { getServicesPageHeroImage } from "@/lib/droneStockImages";
 
 export const dynamic = "force-static";
 export const revalidate = false;
@@ -20,12 +21,17 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://dronegeo.co.uk/services" },
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const hero = await getServicesPageHeroImage();
   return (
     <>
       <SchemaMarkup type="BreadcrumbList" data={{ breadcrumbs: [{ name: "Home", url: "/" }, { name: "Services", url: "/services" }] }} />
-      <section className="bg-primary py-16 md:py-24">
-        <div className="container">
+      <section className="relative overflow-hidden bg-primary py-16 md:py-24">
+        <div className="absolute inset-0">
+          <img src={hero.src} alt="" className="h-full w-full object-cover opacity-25" aria-hidden />
+          <div className="absolute inset-0 bg-primary/75" />
+        </div>
+        <div className="container relative">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-4 font-display text-4xl font-bold text-primary-foreground md:text-5xl">Our Services</h1>
             <p className="text-lg text-primary-foreground/80">

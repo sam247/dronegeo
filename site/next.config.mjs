@@ -40,6 +40,11 @@ const nextConfig = {
     ].map(({ source, destination }) => ({ source, destination, permanent: true }));
 
     return [
+      {
+        source: "/contractors",
+        destination: "/contact",
+        permanent: true,
+      },
       ...nearMeRedirects,
       ...hubPrefixRedirects,
       {

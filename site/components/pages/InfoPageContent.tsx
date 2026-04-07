@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getCategoryPages, getHubData, hubPages, companyInfo, categoryImages, categoryAltText } from "@/lib/data";
-import { serviceImages } from "@/lib/images";
+import { getCategoryPages, getHubData, hubPages, companyInfo, categoryAltText } from "@/lib/data";
+import { getCategoryHubHeroImage } from "@/lib/droneStockImages";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Phone } from "lucide-react";
 import InspectionCTA from "@/components/sections/InspectionCTA";
@@ -17,15 +17,16 @@ interface InfoPageContentProps {
   slug: string;
 }
 
-export default function InfoPageContent({ category, slug }: InfoPageContentProps) {
+export default async function InfoPageContent({ category, slug }: InfoPageContentProps) {
   const hub = getHubData(category);
   const pages = getCategoryPages(category);
   const page = pages.find((p) => p.slug === slug);
   if (!hub || !page) return null;
 
   const otherPages = pages.filter((p) => p.slug !== page.slug).slice(0, 4);
-  const heroImage = serviceImages[categoryImages[category] || "topographical-survey"];
-  const heroAlt = categoryAltText[category] || `${page.title} - professional survey`;
+  const heroStock = await getCategoryHubHeroImage(category);
+  const heroImage = heroStock.src;
+  const heroAlt = heroStock.alt || categoryAltText[category] || `${page.title} - professional survey`;
   const pageFaqs = [
     { question: `What are the signs of ${page.title.toLowerCase()}?`, answer: page.signs.slice(0, 3).join(". ") + "." },
     { question: `How do you diagnose ${page.title.toLowerCase()}?`, answer: page.diagnosis.slice(0, 200) + "..." },

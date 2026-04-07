@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { blogPosts } from "@/lib/blogData";
-import { getBlogImage } from "@/lib/images";
+import { getBlogListStockImages, firstStockImage } from "@/lib/droneStockImages";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from "lucide-react";
@@ -16,12 +16,20 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://dronegeo.co.uk/blog" },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const cardImages = await getBlogListStockImages(blogPosts.length);
+  const hero = await firstStockImage("drone aerial photography blog uk", 1);
   return (
     <>
       <SchemaMarkup type="BreadcrumbList" data={{ breadcrumbs: [{ name: "Home", url: "/" }, { name: "Blog", url: "/blog" }] }} />
-      <section className="bg-primary py-16 md:py-24">
-        <div className="container">
+      <section className="relative overflow-hidden bg-primary py-16 md:py-24">
+        <div className="absolute inset-0">
+          {hero ? (
+            <img src={hero.src} alt="" className="h-full w-full object-cover opacity-25" aria-hidden />
+          ) : null}
+          <div className="absolute inset-0 bg-primary/75" />
+        </div>
+        <div className="container relative">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-4 font-display text-4xl font-bold text-primary-foreground md:text-5xl">Our Blog</h1>
             <p className="text-lg text-primary-foreground/80">Survey insights and expert advice for planning and development.</p>
@@ -35,7 +43,11 @@ export default function BlogPage() {
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <Card className="group overflow-hidden transition-all hover:shadow-lg">
                   <div className="aspect-video overflow-hidden">
-                    <img src={getBlogImage(post, index)} alt={post.title} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                    <img
+                      src={cardImages[index]?.src ?? "/images/services/drone-survey.jpg"}
+                      alt={cardImages[index]?.alt ?? post.title}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
                   </div>
                   <CardHeader>
                     <div className="flex items-center gap-2">

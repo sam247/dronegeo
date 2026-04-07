@@ -17,11 +17,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildHubMetadata(hub, verticalConfig);
 }
 
-export default function HubPageRoute() {
+export default async function HubPageRoute() {
   const hub = getHubData(category);
   const pages = getCategoryPages(category);
   if (!hub || pages.length === 0) notFound();
-  const props = getHubPageProps(category);
+  const props = await getHubPageProps(category);
   if (!props) notFound();
   return <HubPage {...props} />;
 }

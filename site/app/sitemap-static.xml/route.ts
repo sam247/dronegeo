@@ -21,7 +21,6 @@ const staticPaths = [
   "/blog",
   "/survey-guides",
   "/faq",
-  "/contractors",
   "/privacy",
   "/terms",
   ...standardGuidePaths,

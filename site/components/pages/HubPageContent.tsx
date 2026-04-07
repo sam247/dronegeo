@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getCategoryPages, getHubData, hubPages, services, categoryImages, categoryAltText } from "@/lib/data";
-import { serviceImages } from "@/lib/images";
+import { getCategoryPages, getHubData, hubPages, services, categoryAltText } from "@/lib/data";
+import { getCategoryHubHeroImage } from "@/lib/droneStockImages";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import SchemaMarkup from "@/components/seo/SchemaMarkup";
@@ -34,7 +34,7 @@ interface HubPageContentProps {
   category: string;
 }
 
-export default function HubPageContent({ category }: HubPageContentProps) {
+export default async function HubPageContent({ category }: HubPageContentProps) {
   const hub = getHubData(category);
   const pages = getCategoryPages(category);
   if (!hub || pages.length === 0) return null;
@@ -42,8 +42,9 @@ export default function HubPageContent({ category }: HubPageContentProps) {
   const keyServices = services.filter((s) =>
     ["topographical-survey", "measured-building-survey", "drone-survey"].includes(s.slug)
   );
-  const heroImage = serviceImages[categoryImages[category] || "topographical-survey"];
-  const heroAlt = categoryAltText[category] || `${hub.title} - survey services`;
+  const heroStock = await getCategoryHubHeroImage(category);
+  const heroImage = heroStock.src;
+  const heroAlt = heroStock.alt || categoryAltText[category] || `${hub.title} - survey services`;
   const crossSections = categorisePages(category);
 
   return (

@@ -4,10 +4,9 @@ import {
   hubPages,
   services,
   locations,
-  categoryImages,
   categoryAltText,
 } from "@/lib/data";
-import { getHeroImage } from "@/lib/images";
+import { getCategoryHubHeroImage } from "@/lib/droneStockImages";
 import { verticalConfig } from "@/config";
 import type { CrossSection } from "engine";
 
@@ -34,7 +33,7 @@ function categorisePages(category: string): CrossSection[] {
     .filter((s) => s.pages.length > 0);
 }
 
-export function getHubPageProps(category: string) {
+export async function getHubPageProps(category: string) {
   const hub = getHubData(category);
   const pages = getCategoryPages(category);
   if (!hub || pages.length === 0) return null;
@@ -43,12 +42,10 @@ export function getHubPageProps(category: string) {
       s.slug
     )
   ).slice(0, 3);
-  const heroImage = getHeroImage({
-    category,
-    categoryImagesMap: categoryImages,
-  });
+  const heroStock = await getCategoryHubHeroImage(category);
+  const heroImage = heroStock.src;
   const heroAlt =
-    categoryAltText[category] || `${hub.title} - professional survey services`;
+    heroStock.alt || categoryAltText[category] || `${hub.title} - professional survey services`;
   const crossSections = categorisePages(category);
   const pillarGuides = [
     { title: "When you need a survey", href: "/survey-issues" },

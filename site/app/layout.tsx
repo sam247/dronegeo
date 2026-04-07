@@ -9,7 +9,6 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { companyInfo } from "@/lib/data";
 import { verticalConfig } from "@/config";
 import { ScrollToTop } from "engine";
-import { mainlineGroupLinksForSite } from "engine/data/mainline-group";
 import { Providers } from "./providers";
 
 export const viewport = { width: "device-width", initialScale: 1 };
@@ -28,12 +27,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const sameAs = [companyInfo.social.linkedin, companyInfo.social.twitter, companyInfo.social.facebook].filter(
+    (u) => typeof u === "string" && u.length > 0 && !u.startsWith("#")
+  );
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: companyInfo.name,
     url: verticalConfig.baseUrl,
-    sameAs: mainlineGroupLinksForSite(verticalConfig.baseUrl).map((item) => item.href),
+    ...(sameAs.length > 0 ? { sameAs } : {}),
   };
 
   return (

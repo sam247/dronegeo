@@ -38,8 +38,6 @@ const Header = () => {
     serviceSlug: inferServiceSlugForCtaBias(pathname, services),
   });
 
-  const isActive = (path: string) => pathname === path;
-
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between md:h-20">
@@ -92,16 +90,6 @@ const Header = () => {
           >
             Aerial Photography
           </Link>
-          <Link
-            href="/about"
-            className={cn(
-              "px-3 py-2 text-sm font-medium transition-colors hover:text-primary",
-              isActive("/about") ? "text-primary" : "text-muted-foreground"
-            )}
-          >
-            About
-          </Link>
-
           {/* Resources Dropdown */}
           <NavigationMenu>
             <NavigationMenuList>
@@ -132,7 +120,7 @@ const Header = () => {
           </TrackablePhoneLink>
           <QuoteFormPrimaryCta
             contactPath="/contact"
-            variant="default"
+            variant="highlight"
             size="default"
             ctaText={headerQuoteLabel}
             ctaSeed={headerQuoteSeed}
@@ -160,8 +148,6 @@ const Header = () => {
             <Link href={getServiceUrl("drone-inspections")} className="flex min-h-[44px] items-center text-sm font-medium text-foreground" onClick={() => setMobileMenuOpen(false)}>Drone Inspections</Link>
             <Link href={getServiceUrl("thermal-drone-imaging")} className="flex min-h-[44px] items-center text-sm font-medium text-foreground" onClick={() => setMobileMenuOpen(false)}>Thermal Imaging</Link>
             <Link href={getServiceUrl("aerial-photography")} className="flex min-h-[44px] items-center text-sm font-medium text-foreground" onClick={() => setMobileMenuOpen(false)}>Aerial Photography</Link>
-            <Link href="/about" className="flex min-h-[44px] items-center text-sm font-medium text-foreground" onClick={() => setMobileMenuOpen(false)}>About</Link>
-
             {/* Mobile Resources Accordion */}
             <div>
               <button
@@ -202,7 +188,7 @@ const Header = () => {
               </TrackablePhoneLink>
               <QuoteFormPrimaryCta
                 contactPath="/contact"
-                variant="default"
+                variant="highlight"
                 size="default"
                 className="w-full"
                 ctaText={headerQuoteLabel}

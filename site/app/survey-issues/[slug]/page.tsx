@@ -112,7 +112,7 @@ export default async function SurveyIssuesPage({ params }: Props) {
       />
     );
   }
-  const props = getInfoPageProps(category, rawSlug);
+  const props = await getInfoPageProps(category, rawSlug);
   if (!props) notFound();
   return <InfoPage {...props} />;
 }

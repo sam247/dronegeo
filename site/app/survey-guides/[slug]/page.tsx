@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildInfoMetadata(hub, page, verticalConfig);
 }
 
-export default function InfoPageRoute({ params }: Props) {
-  const props = getInfoPageProps(category, params.slug);
+export default async function InfoPageRoute({ params }: Props) {
+  const props = await getInfoPageProps(category, params.slug);
   if (!props) notFound();
   return <InfoPage {...props} />;
 }
