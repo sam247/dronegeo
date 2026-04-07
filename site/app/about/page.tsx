@@ -13,10 +13,10 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 export const metadata: Metadata = {
-  title: "About Us | Mainline Surveys",
+  title: "About Us | DroneGeo",
   description:
-    "Mainline Surveys is part of Mainline Group. Land, measured building, utility and drone surveys for planning and construction across the UK.",
-  alternates: { canonical: "https://mainlinesurveys.co.uk/about" },
+    "DroneGeo provides drone inspections, thermal imaging and aerial photography across London and the Home Counties.",
+  alternates: { canonical: "https://dronegeo.co.uk/about" },
 };
 
 const groupLinks = mainlineGroupLinksForSite(verticalConfig.baseUrl);
@@ -32,11 +32,11 @@ export default function AboutPage() {
       <section className="bg-primary py-16 md:py-24">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="mb-4 font-display text-4xl font-bold text-primary-foreground md:text-5xl">About Mainline Surveys</h1>
+            <h1 className="mb-4 font-display text-4xl font-bold text-primary-foreground md:text-5xl">About DroneGeo</h1>
             <p className="text-lg text-primary-foreground/80">
               Topographical, measured building, utility and drone surveys for architects, developers and property owners. We focus on clear scope, reliable programmes and deliverables that drop into design and planning workflows.
             </p>
-            <p className="mt-3 text-sm text-primary-foreground/70">Part of Mainline Group.</p>
+            <p className="mt-3 text-sm text-primary-foreground/70">Drone-first inspection and survey services.</p>
           </div>
         </div>
       </section>
@@ -47,14 +47,14 @@ export default function AboutPage() {
             <div>
               <h2 className="mb-4 font-display text-3xl font-bold">Who we are</h2>
               <p className="mb-4 text-muted-foreground">
-                Mainline Surveys connects clients with qualified survey capability for land, buildings and utilities — from pre-planning topographical work through to measured surveys, utility mapping and aerial capture where it adds value.
+                DroneGeo helps clients inspect roofs, buildings and sites quickly using drone capture and clear reporting.
               </p>
               <p className="text-muted-foreground">
-                <strong className="text-foreground">Mainline Surveys is part of the wider Mainline Group,</strong> delivering specialist surveying services across the UK alongside our drainage, security and groundworks divisions.
+                <strong className="text-foreground">DroneGeo focuses on practical aerial inspections,</strong> giving property teams and contractors the visuals and data they need without slow access setups.
               </p>
             </div>
             <div className="aspect-[4/3] overflow-hidden rounded-lg bg-muted">
-              <img src={aboutTeam} alt="Mainline Surveys team" className="h-full w-full object-cover" />
+              <img src={aboutTeam} alt="DroneGeo team" className="h-full w-full object-cover" />
             </div>
           </div>
         </div>
@@ -109,10 +109,9 @@ export default function AboutPage() {
 
       <section className="section-padding">
         <div className="container max-w-3xl">
-          <h2 className="mb-4 font-display text-3xl font-bold">Mainline Group</h2>
+          <h2 className="mb-4 font-display text-3xl font-bold">Our Service Network</h2>
           <p className="mb-6 text-muted-foreground">
-            Mainline Surveys is one of five specialist divisions under Mainline Group. Other divisions cover drainage, commercial security and access control, groundworks, and scaffolding. You are on the{" "}
-            <strong className="text-foreground">Mainline Surveys</strong> site; other divisions are linked below if your project needs combined expertise.
+            DroneGeo is focused on drone inspections and aerial capture. Related service brands are listed below if your project needs additional specialist support.
           </p>
           <GroupFooter
             items={groupLinks}

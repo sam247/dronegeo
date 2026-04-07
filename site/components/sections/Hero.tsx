@@ -7,8 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowRight, ArrowLeft, FileCheck, Home, Map, Camera, Search } from "lucide-react";
-import { heroBg } from "@/lib/images";
-import { services } from "@/lib/data";
+import { heroBg, heroBgVideo } from "@/lib/images";
 import { verticalConfig } from "@/config";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -22,7 +21,6 @@ import {
   zodIssuesToFieldErrorMap,
   QUOTE_FORM_ELEMENT_ID,
   QuoteFormPrimaryCta,
-  getCtaVariant,
   getLastCtaFromSession,
 } from "engine";
 import { z } from "zod";
@@ -34,10 +32,10 @@ const SERVICE_OPTIONS = ["Drone surveys", "Drone inspections", "Thermal drone im
 const PROJECT_STAGE_OPTIONS = ["planning", "ready", "exploring"] as const;
 
 const issueOptions = [
-  { id: "planning", label: "Planning application", icon: FileCheck },
-  { id: "extension", label: "Extension design", icon: Home },
-  { id: "development", label: "Development feasibility", icon: Map },
-  { id: "drone", label: "Drone survey", icon: Camera },
+  { id: "roof", label: "Roof inspection", icon: Home },
+  { id: "building", label: "Building inspection", icon: Map },
+  { id: "photo", label: "Property photography", icon: Camera },
+  { id: "solar", label: "Solar panel inspection", icon: FileCheck },
   { id: "unsure", label: "Not sure", icon: Search },
 ];
 
@@ -93,17 +91,16 @@ function buildHeroLeadSchema() {
     postcode: leadPostcodeField,
     town: z.string().trim().min(1, "Town is required").max(100),
     service: z.enum(SERVICE_OPTIONS, { message: "Please select a service" }),
-    description: z.string().trim().min(1, "Please describe your project or survey requirement").max(2000),
+    description: z.string().trim().min(1, "Please describe what you need checked").max(2000),
     project_stage: z.enum(PROJECT_STAGE_OPTIONS).optional(),
   });
 }
 
 const Hero = () => {
+  const heroVideoSrc = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || heroBgVideo;
   const aboutLabelIndex = getVariantIndex(`about:home:${verticalConfig.verticalId}`, HERO_ABOUT_LABELS.length);
   const homeCtaSeed = `${verticalConfig.verticalId}-home`;
-  const homeCtaLabel = getCtaVariant(homeCtaSeed, verticalConfig.ctaVariants, {
-    serviceSlug: services[0]?.slug,
-  });
+  const homeCtaLabel = "Get a quote";
   const { toast } = useToast();
   const [utmSource, setUtmSource] = useState<string | undefined>(undefined);
   const [step, setStep] = useState(1);
@@ -233,7 +230,17 @@ const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-primary py-16 md:py-24 lg:py-28">
       <div className="absolute inset-0">
-        <img src={heroBg} alt="Drone surveys and inspections for property and construction" className="h-full w-full object-cover opacity-20" />
+        <video
+          className="h-full w-full object-cover opacity-30"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={heroBg}
+        >
+          <source src={heroVideoSrc} type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-primary/70" />
       </div>
 
@@ -241,13 +248,13 @@ const Hero = () => {
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="animate-fade-in">
             <h1 className="mb-5 font-display text-3xl font-bold tracking-tight text-primary-foreground md:text-4xl lg:text-5xl">
-              Professional Drone Surveys &amp; Inspections
+              Drone Surveys &amp; Inspections
             </h1>
             <p className="mb-3 text-base text-primary-foreground/80 md:text-lg">
-              We provide drone surveys, drone inspections, thermal imaging and aerial photography for property and construction decisions.
+              Fast, safe aerial inspections, mapping and photography without scaffolding or delays.
             </p>
             <p className="mb-4 text-base text-primary-foreground/80 md:text-lg">
-              Support is built for property managers, contractors, estate agents and homeowners across London and the Home Counties.
+              We use drones to capture high-resolution data for roofs, buildings and land. Ideal for inspections, property checks, construction sites and surveys across London and the Home Counties.
             </p>
             <p className="mb-8 text-xs text-primary-foreground/60">
               <Link href="/about" className="underline-offset-2 hover:underline">
@@ -273,9 +280,9 @@ const Hero = () => {
 
           <div className="animate-fade-in opacity-0 [animation-delay:150ms]">
             <div className="rounded-xl border border-primary-foreground/10 bg-background p-6 shadow-2xl md:p-8">
-              <h2 className="mb-1 font-display text-xl font-bold text-foreground">Get a Free Quote</h2>
+              <h2 className="mb-1 font-display text-xl font-bold text-foreground">Get a quote</h2>
               <p className="mb-5 text-sm text-muted-foreground">
-                {step === 1 ? "Tell us about your project." : "We'll call you back within 30 minutes."}
+                {step === 1 ? "Quick details and we will get back to you." : "Fast response from our team."}
               </p>
 
               <form id={QUOTE_FORM_ELEMENT_ID} onSubmit={handleSubmit} className="space-y-3">
@@ -327,7 +334,7 @@ const Hero = () => {
                     </div>
 
                     <div>
-                      <p className="mb-2 text-sm font-medium text-muted-foreground">What best describes your project?</p>
+                      <p className="mb-2 text-sm font-medium text-muted-foreground">What do you need checked?</p>
                       <div className="grid grid-cols-2 gap-2">
                         {issueOptions.map((option, i) => (
                           <button
@@ -382,7 +389,7 @@ const Hero = () => {
                     <div>
                       <Select value={formData.service} onValueChange={(v) => patchForm({ service: v })}>
                         <SelectTrigger className={errors.service ? "border-destructive" : ""} aria-invalid={!!errors.service}>
-                          <SelectValue placeholder="What drone service do you need? *" />
+                          <SelectValue placeholder="What do you need? *" />
                         </SelectTrigger>
                         <SelectContent>
                           {SERVICE_OPTIONS.map((opt) => (
@@ -397,7 +404,7 @@ const Hero = () => {
 
                     <div>
                       <Textarea
-                        placeholder="Describe your project or drone requirement *"
+                        placeholder="Describe what you need checked *"
                         value={formData.details}
                         onChange={(e) => patchForm({ details: e.target.value })}
                         className={cn("min-h-[60px]", errors.details && "border-destructive")}
@@ -406,7 +413,7 @@ const Hero = () => {
                       {errors.details && <p className="mt-1 text-xs text-destructive">{errors.details}</p>}
                     </div>
                     <div>
-                      <p className="mb-2 text-sm font-medium text-muted-foreground">Project stage (optional)</p>
+                      <p className="mb-2 text-sm font-medium text-muted-foreground">When do you need this? (optional)</p>
                       <div className="grid grid-cols-3 gap-2">
                         {PROJECT_STAGE_OPTIONS.map((option) => (
                           <label key={option} className="flex items-center gap-2 rounded-md border px-3 py-2 text-sm capitalize">
@@ -425,7 +432,7 @@ const Hero = () => {
                     </div>
 
                     <Button type="submit" size="lg" variant="highlight" className="w-full text-base" disabled={submitting}>
-                      {submitting ? "Submitting…" : "Request a Callback"}
+                      {submitting ? "Submitting…" : "Get a quote"}
                       {!submitting && <ArrowRight className="ml-2 h-4 w-4" />}
                     </Button>
 
@@ -445,7 +452,7 @@ const Hero = () => {
               </form>
 
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                No obligation · Free drone quote
+                No obligation. Fast response.
               </p>
             </div>
           </div>

@@ -13,14 +13,9 @@ import type { CrossSection } from "engine";
 
 function categorisePages(category: string): CrossSection[] {
   const symptomCategories = ["problems"];
-  const repairCategories = ["repair-methods"];
-  const inspectionCategories = ["inspection", "survey"];
-  const costCategories = ["costs"];
   const allCategories = [
     { label: "Symptom Guides", cats: symptomCategories },
-    { label: "Repair Methods", cats: repairCategories },
-    { label: "Inspection Guides", cats: inspectionCategories },
-    { label: "Cost Guides", cats: costCategories },
+    { label: "Drone Guides", cats: ["guides"] },
   ];
   return allCategories
     .filter((section) => !section.cats.includes(category))
@@ -44,7 +39,7 @@ export function getHubPageProps(category: string) {
   const pages = getCategoryPages(category);
   if (!hub || pages.length === 0) return null;
   const keyServices = services.filter((s) =>
-    ["topographical-survey", "measured-building-survey", "drone-survey", "boundary-survey", "utility-survey"].includes(
+    ["drone-surveys", "drone-inspections", "thermal-drone-imaging", "aerial-photography"].includes(
       s.slug
     )
   ).slice(0, 3);

@@ -2,12 +2,12 @@ import { companyInfo } from "@/lib/data";
 import type { VerticalConfig, HomepageTrustPointsSix } from "engine";
 
 const homepageTrustPoints: HomepageTrustPointsSix = [
-  { icon: "Shield", title: "CAA-compliant operations", description: "Qualified pilots and safe method statements for every mission." },
-  { icon: "Users", title: "Inspection-first reporting", description: "Actionable visuals and findings for property and asset decisions." },
-  { icon: "BadgeCheck", title: "Consistent capture quality", description: "Repeatable flight plans and calibrated workflows for reliable output." },
-  { icon: "Clock", title: "Rapid mobilisation", description: "Fast scheduling for urgent inspection and survey requirements." },
-  { icon: "Wrench", title: "Practical deliverables", description: "Imagery, thermal outputs, orthomosaics and concise reports in one pack." },
-  { icon: "Headphones", title: "Regional focus", description: "Dedicated support across London, Hertfordshire, Bedfordshire and Buckinghamshire." },
+  { icon: "Shield", title: "No scaffolding required", description: "Inspect roofs and buildings without ladders or access equipment." },
+  { icon: "Clock", title: "Faster turnaround", description: "Capture and deliver results quickly, often same day." },
+  { icon: "BadgeCheck", title: "Safer inspections", description: "Reduce risk by avoiding manual access to height." },
+  { icon: "Users", title: "High-resolution data", description: "Clear imagery and video for accurate assessment." },
+  { icon: "Wrench", title: "Simple reporting", description: "Straightforward visuals and summaries you can act on." },
+  { icon: "Headphones", title: "Local coverage", description: "Operating across London, Hertfordshire, Bedfordshire and Buckinghamshire." },
 ];
 
 // Kept for compatibility with existing service detail component wiring.

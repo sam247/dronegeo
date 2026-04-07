@@ -48,6 +48,7 @@ export function getBlogImage(
 }
 
 export const heroBg = `${base}/hero-bg.jpg`;
+export const heroBgVideo = "/hero_bg_video.mp4";
 export const aboutTeam = `${base}/about-team.jpg`;
 
 /**

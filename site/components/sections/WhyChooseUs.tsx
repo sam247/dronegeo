@@ -19,7 +19,7 @@ const WhyChooseUs = () => {
             Why Choose Us
           </span>
           <h2 className="mb-4 font-display text-3xl font-bold text-foreground md:text-4xl">
-            The Mainline Surveys Difference
+            Why Choose DroneGeo
           </h2>
           <p className="text-muted-foreground">
             What sets us apart from other survey providers in London and the South East.

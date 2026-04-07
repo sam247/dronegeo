@@ -20,7 +20,7 @@ const AboutPreview = () => {
             <div className="aspect-[4/3] overflow-hidden rounded-lg bg-muted">
               <img
                 src={aboutTeam}
-                alt="Mainline Surveys team at work"
+                alt="DroneGeo team at work"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -36,10 +36,10 @@ const AboutPreview = () => {
               About Us
             </span>
             <h2 className="mb-4 font-display text-3xl font-bold text-foreground md:text-4xl">
-              London &amp; South East Survey Partners
+              London &amp; Home Counties Drone Team
             </h2>
             <p className="mb-6 text-muted-foreground">
-              Mainline Surveys connects you with qualified land and drone survey partners for topographical, measured building, utility and drone surveys across the UK. Professional surveying for planning, development and construction.
+              DroneGeo provides fast drone inspections, aerial photography and thermal imaging for roofs, buildings and sites.
             </p>
             <ul className="mb-8 space-y-3">
               {highlights.map((item) => (

@@ -26,9 +26,9 @@ const exampleLead = [
 ];
 
 export const metadata: Metadata = {
-  title: "Survey Partners — Work With Us | Mainline Surveys",
+  title: "Survey Partners — Work With Us | DroneGeo",
   description: "Join our network of survey partners. Receive real enquiries for topographical, measured building, utility and drone surveys across London and the South East.",
-  alternates: { canonical: "https://mainlinesurveys.co.uk/contractors" },
+  alternates: { canonical: "https://dronegeo.co.uk/contractors" },
 };
 
 export default function ContractorsPage() {

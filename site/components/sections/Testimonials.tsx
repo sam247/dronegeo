@@ -14,7 +14,7 @@ const Testimonials = () => {
             What Our Clients Say
           </h2>
           <p className="text-muted-foreground">
-            Don't just take our word for it – hear from some of our satisfied clients.
+            Feedback from recent clients using our drone services.
           </p>
         </div>
 

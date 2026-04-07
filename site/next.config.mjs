@@ -3,6 +3,12 @@ const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: false },
   transpilePackages: ["engine"],
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "images.pexels.com" },
+    ],
+  },
   async redirects() {
     const canonicalNearMe = "/topographical-survey-near-me";
     const legacyDrainNearMe = [

@@ -20,11 +20,11 @@ interface SchemaMarkupProps {
   };
 }
 
-const baseUrl = "https://mainlinesurveys.co.uk";
+const baseUrl = "https://dronegeo.co.uk";
 
 const parentOrganization = {
   "@type": "Organization",
-  name: "Mainline Group",
+  name: "DroneGeo",
 };
 
 const postalAddress = {

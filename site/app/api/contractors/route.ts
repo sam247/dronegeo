@@ -3,9 +3,9 @@ import { z } from "zod";
 import { Resend } from "resend";
 import { leadEmailField, leadPhoneField } from "engine";
 
-const VERTICAL_LABEL = "Mainline Surveys";
+const VERTICAL_LABEL = "DroneGeo";
 const emailTo = "sampettiford@googlemail.com";
-const emailFrom = "Mainline Surveys <leads@mainlinesurveys.co.uk>";
+const emailFrom = "DroneGeo <leads@dronegeo.co.uk>";
 
 const ContractorInputSchema = z.object({
   company: z.string().trim().min(1, "Company name is required").max(200),

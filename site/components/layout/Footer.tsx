@@ -77,23 +77,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/survey-costs" className="text-sm text-neutral-300 transition-colors hover:text-white">
-                  Drone Costs
-                </Link>
-              </li>
-              <li>
-                <Link href="/survey-services" className="text-sm text-neutral-300 transition-colors hover:text-white">
-                  Drone Services
-                </Link>
-              </li>
-              <li>
                 <Link href="/guides" className="text-sm text-neutral-300 transition-colors hover:text-white">
                   All Guides
-                </Link>
-              </li>
-              <li>
-                <Link href="/homebuyer-surveys" className="text-sm text-neutral-300 transition-colors hover:text-white">
-                  Homebuyer Guides
                 </Link>
               </li>
             </ul>
@@ -152,7 +137,6 @@ const Footer = () => {
           <nav className="flex flex-wrap items-center justify-center gap-x-1 gap-y-1 sm:justify-end" aria-label="Footer">
             <Link href="/about" className="inline-flex min-h-[44px] items-center px-2 text-sm text-neutral-400 transition-colors hover:text-white">About</Link>
             <Link href="/service-areas" className="inline-flex min-h-[44px] items-center px-2 text-sm text-neutral-400 transition-colors hover:text-white">Service Areas</Link>
-            <Link href="/projects" className="inline-flex min-h-[44px] items-center px-2 text-sm text-neutral-400 transition-colors hover:text-white">Projects</Link>
             <Link href="/blog" className="inline-flex min-h-[44px] items-center px-2 text-sm text-neutral-400 transition-colors hover:text-white">Blog</Link>
             <Link href="/privacy" className="inline-flex min-h-[44px] items-center px-2 text-sm text-neutral-400 transition-colors hover:text-white">Privacy</Link>
             <Link href="/terms" className="inline-flex min-h-[44px] items-center px-2 text-sm text-neutral-400 transition-colors hover:text-white">Terms</Link>

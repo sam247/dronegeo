@@ -121,7 +121,7 @@ export default function LocationPageContent({ service, location, serviceSlug, lo
                 {service.title} Services in {location.name}
               </h2>
               <p className="mb-6 max-w-prose text-muted-foreground">
-                Mainline Surveys connects you with qualified survey partners for {service.title.toLowerCase()} in {location.name}, {location.area}. Professional land and drone surveying for architects, developers and property owners.
+                DroneGeo provides {service.title.toLowerCase()} in {location.name}, {location.area}. Fast drone-led inspections and imagery for property teams, contractors and homeowners.
               </p>
               <p className="mb-8 text-muted-foreground">{service.description}</p>
 

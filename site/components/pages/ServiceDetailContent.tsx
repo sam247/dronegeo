@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { services, locations, relatedGuideLinksByService, serviceFaqsBySlug } from "@/lib/data";
 import { getHeroImage } from "@/lib/images";
+import { getDroneGalleryImages } from "@/lib/droneStockImages";
 import { verticalConfig, partnerBaseUrl, partnerDrainSurveyPath } from "@/config";
 import { ServiceDetailContent as EngineServiceDetailContent } from "engine";
 
@@ -8,17 +8,49 @@ interface ServiceDetailContentProps {
   service: (typeof services)[number];
 }
 
-export default function ServiceDetailContent({ service }: ServiceDetailContentProps) {
+export default async function ServiceDetailContent({ service }: ServiceDetailContentProps) {
   const symptomLinks = relatedGuideLinksByService[service.slug] ?? [];
   const faqs = serviceFaqsBySlug[service.slug] ?? [];
   const heroImageSrc = getHeroImage({ serviceSlug: service.slug });
+  const galleryImages = await getDroneGalleryImages(service.slug, 2);
+  const isDroneSurveys = service.slug === "drone-surveys";
+  const pageConfig = isDroneSurveys
+    ? {
+        ...verticalConfig,
+        sectionIntros: {
+          ...verticalConfig.sectionIntros,
+          types:
+            "Drone surveys are often used alongside inspections, mapping and reporting to give a complete picture of a site. They are especially useful where speed, safety or access is a concern.",
+          process: "A simple four-step workflow from brief to final delivery.",
+          industries: "Practical support for teams that need clear site visuals and reliable aerial data.",
+          benefits: "Clear outcomes focused on speed, minimal disruption and usable outputs.",
+        },
+        serviceTypesBySlug: {
+          ...verticalConfig.serviceTypesBySlug,
+          "drone-surveys": [
+            "Checking land before planning or development",
+            "Monitoring construction progress",
+            "Reviewing large or hard-to-access areas",
+            "Capturing site conditions for reports or decisions",
+          ],
+        },
+        industries: [
+          "Construction",
+          "Property & development",
+          "Commercial sites",
+          "Land and infrastructure",
+        ],
+        relatedLocationsIntro:
+          "Drone Surveys across London, Hertfordshire, Bedfordshire and Buckinghamshire.",
+      }
+    : verticalConfig;
 
   return (
     <EngineServiceDetailContent
       service={service}
       services={services}
       locations={locations}
-      verticalConfig={verticalConfig}
+      verticalConfig={pageConfig}
       heroImageSrc={heroImageSrc}
       contactPath="/contact"
       servicesPath="/services"
@@ -27,41 +59,38 @@ export default function ServiceDetailContent({ service }: ServiceDetailContentPr
       symptomLinks={symptomLinks}
       symptomLinksSectionTitle="Related guides"
       faqs={faqs}
-      overviewImage={{ src: heroImageSrc, alt: `${service.title} – ${verticalConfig.siteName}` }}
-      firstCtaMessage="Need a survey for your project? Request a quote and we'll match you with a survey specialist."
-      firstCtaButtonText="Request a Survey Quote"
+      overviewImage={{
+        src: heroImageSrc,
+        alt: isDroneSurveys ? "Aerial survey capture in progress" : `${service.title} – ${verticalConfig.siteName}`,
+      }}
+      firstCtaMessage={
+        isDroneSurveys
+          ? "Get a drone survey quote. Tell us about your site and we will come back quickly with options."
+          : "Need a drone service for your project? Request a quote and we will scope the right inspection or capture route."
+      }
+      firstCtaButtonText={isDroneSurveys ? "Get a quote" : "Request a Drone Quote"}
       firstCtaButtonLink="/contact"
-      secondCtaHeading="Get a Survey Quote"
-      secondCtaBody="Contact us for a no-obligation quote or to discuss your project. We'll advise on the right survey type, deliverables and programme."
-      secondCtaButtonText="Request a Quote"
+      secondCtaHeading={isDroneSurveys ? "Get a drone survey quote" : "Get a Drone Quote"}
+      secondCtaBody={
+        isDroneSurveys
+          ? "Tell us about your site and we will come back quickly with options."
+          : "Contact us for a no-obligation quote and we will advise the right drone service, deliverables and timeline."
+      }
+      secondCtaButtonText={isDroneSurveys ? "Get a quote" : "Request a Quote"}
+      galleryImages={galleryImages}
       overviewExtra={
         <>
           <p className="mb-4 text-sm text-muted-foreground">
-            Drain surveys are often required before construction or utility mapping work.{" "}
+            DroneGeo specialises in aerial inspections and imaging for roofs, facades, solar systems and property marketing.{" "}
             <a
               href={`${partnerBaseUrl}${partnerDrainSurveyPath}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              Find out more about drain surveys
+              View DroneGeo services
             </a>
             .
-          </p>
-          <p className="mb-8 text-sm text-muted-foreground">
-            Explore our{" "}
-            <Link href="/topographical-survey" className="text-primary hover:underline">
-              topographical
-            </Link>
-            ,{" "}
-            <Link href="/measured-building-survey" className="text-primary hover:underline">
-              measured building
-            </Link>
-            , and{" "}
-            <Link href="/utility-survey" className="text-primary hover:underline">
-              utility surveys
-            </Link>{" "}
-            for planning and construction projects.
           </p>
         </>
       }

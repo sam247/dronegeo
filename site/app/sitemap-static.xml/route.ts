@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { verticalConfig } from "@/config";
 import { buildUrlset } from "@/lib/sitemapXml";
-import { projects } from "@/data/projects";
 import { blogPosts } from "@/lib/blogData";
 
 export const dynamic = "force-static";
@@ -10,11 +9,7 @@ export const revalidate = false;
 const standardGuidePaths = [
   "/guides",
   "/how-it-works",
-  "/process",
-  "/common-problems",
-  "/insurance",
-  "/legal",
-  "/homeowners",
+  "/process"
 ];
 
 const staticPaths = [
@@ -23,10 +18,8 @@ const staticPaths = [
   "/service-areas",
   "/services",
   "/contact",
-  "/projects",
   "/blog",
   "/survey-guides",
-  "/do-i-need-a-land-survey",
   "/faq",
   "/contractors",
   "/privacy",
@@ -34,7 +27,7 @@ const staticPaths = [
   ...standardGuidePaths,
 ];
 
-const nearMePaths = ["/topographical-survey-near-me"];
+const nearMePaths: string[] = [];
 
 export async function GET() {
   const baseUrl = verticalConfig.baseUrl.replace(/\/$/, "");
@@ -51,12 +44,6 @@ export async function GET() {
       lastmod,
       changefreq: "monthly" as const,
       priority: 0.7,
-    })),
-    ...projects.map((project) => ({
-      url: `${baseUrl}/projects/${project.slug}`,
-      lastmod,
-      changefreq: "monthly" as const,
-      priority: 0.65,
     })),
     ...blogPosts.map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,

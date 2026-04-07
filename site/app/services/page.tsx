@@ -15,9 +15,9 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 export const metadata: Metadata = {
-  title: "Our Services | Mainline Surveys",
-  description: "Land and drone surveying across the UK. Topographical, measured building, utility and drone surveys for planning, development and construction.",
-  alternates: { canonical: "https://mainlinesurveys.co.uk/services" },
+  title: "Our Services | DroneGeo",
+  description: "Drone surveys, inspections, thermal imaging and aerial photography across London and the Home Counties.",
+  alternates: { canonical: "https://dronegeo.co.uk/services" },
 };
 
 export default function ServicesPage() {

@@ -12,14 +12,13 @@ import { TrustPoints, pickHomepageArticleCards } from "engine";
 import { verticalConfig } from "@/config";
 import { getCategoryPages, getHubData } from "@/lib/data";
 import { blogPosts } from "@/lib/blogData";
-import { surveyProblemPages } from "@/data/problemPages";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Mainline Surveys | Land, Building & Drone Surveyors Across the UK",
+  title: "DroneGeo | Drone Surveys, Inspections, Thermal Imaging & Aerial Photography",
   description:
-    "Professional topographical, measured building, boundary, utility and drone surveys for planning, development and construction. UK survey quotes and specialist partners.",
-  alternates: { canonical: "https://mainlinesurveys.co.uk" },
+    "DroneGeo provides drone surveys, drone inspections, thermal imaging and aerial photography across London, Hertfordshire, Bedfordshire and Buckinghamshire.",
+  alternates: { canonical: "https://dronegeo.co.uk" },
 };
 
 export default function HomePage() {
@@ -36,22 +35,40 @@ export default function HomePage() {
     blogPosts.map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt })),
     fallbacks
   );
-  const problemItems = surveyProblemPages.slice(0, 6).map((problem) => ({
-    slug: problem.slug,
-    title: problem.title,
-    href: `/survey-issues/${problem.slug}`,
-    context: problem.whenToCall,
-  }));
-
   return (
     <>
       <SchemaMarkup type="LocalBusiness" data={{ areaServed: "London and surrounding areas" }} />
       <Hero />
       <HomeTrustCoreBar />
       <HomeProblemPreviewSection
-        title="What do you need help with?"
-        intro="Select the issue below to get matched with a specialist near you."
-        items={problemItems}
+        title="What do you need checked?"
+        intro="Select what you need and we will point you to the right service."
+        items={[
+          {
+            slug: "roof-inspections",
+            title: "Roof inspections",
+            href: "/survey-issues/roof-inspections",
+            context: "Check for damage, leaks or general condition without needing scaffolding.",
+          },
+          {
+            slug: "building-inspections",
+            title: "Building inspections",
+            href: "/survey-issues/building-inspections",
+            context: "Inspect facades, hard-to-reach areas and external features safely.",
+          },
+          {
+            slug: "estate-agent-photography",
+            title: "Property photography",
+            href: "/survey-issues/estate-agent-photography",
+            context: "Aerial photos and video for estate agents, listings and marketing.",
+          },
+          {
+            slug: "solar-panel-inspection",
+            title: "Solar panel inspection",
+            href: "/survey-issues/solar-panel-inspection",
+            context: "Identify faults, damage or efficiency issues using aerial and thermal imaging.",
+          },
+        ]}
       />
       <ServicesGrid />
       <TrustPoints
@@ -63,12 +80,12 @@ export default function HomePage() {
         <div className="container">
           <div className="mx-auto mb-10 max-w-2xl text-center">
             <h2 className="font-display text-3xl font-bold text-foreground md:text-4xl">
-              Planning a survey? Start here
+              Guides & Insights
             </h2>
-            <p className="mt-2 text-muted-foreground">Practical guides and articles from our team.</p>
+            <p className="mt-2 text-muted-foreground">Practical guidance from recent drone inspection work.</p>
           </div>
           <ul className="grid gap-6 md:grid-cols-3">
-            {articleCards.map((card) => (
+            {articleCards.slice(0, 3).map((card) => (
               <li key={card.href}>
                 <article className="flex h-full flex-col rounded-lg border border-border bg-card p-6 transition-shadow hover:shadow-md">
                   <h3 className="font-display text-lg font-semibold text-foreground">

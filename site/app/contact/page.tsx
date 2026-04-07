@@ -10,9 +10,9 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 export const metadata: Metadata = {
-  title: "Contact Us | Mainline Surveys",
-  description: "Get in touch for a survey quote. Land and drone surveying for planning, development and construction across the UK.",
-  alternates: { canonical: "https://mainlinesurveys.co.uk/contact" },
+  title: "Contact Us | DroneGeo",
+  description: "Get in touch for a drone quote. Fast inspections, thermal imaging and aerial photography.",
+  alternates: { canonical: "https://dronegeo.co.uk/contact" },
 };
 
 export default function ContactPage() {

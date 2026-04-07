@@ -38,7 +38,7 @@ export const howItWorksContent: { title: string; metaDescription: string; intro:
 
 export const processContent: { title: string; metaDescription: string; intro: string; sections: GuidePageSection[] } = {
   title: "Our survey process",
-  metaDescription: "Typical steps for commissioning a survey with Mainline Surveys.",
+  metaDescription: "Typical steps for commissioning a survey with DroneGeo.",
   intro: "A clear process keeps scope, cost and dates aligned with your planning or construction programme.",
   sections: [
     { heading: "Enquiry", paragraphs: ["We capture site address, proposed outputs and deadline drivers."] },

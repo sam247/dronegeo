@@ -11,9 +11,9 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 export const metadata: Metadata = {
-  title: "Blog | Mainline Surveys",
-  description: "Insights on land surveying, drone surveys, planning and development from Mainline Surveys.",
-  alternates: { canonical: "https://mainlinesurveys.co.uk/blog" },
+  title: "Blog | DroneGeo",
+  description: "DroneGeo insights on drone inspections, thermal imaging and aerial property capture.",
+  alternates: { canonical: "https://dronegeo.co.uk/blog" },
 };
 
 export default function BlogPage() {

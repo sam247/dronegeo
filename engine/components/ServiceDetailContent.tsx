@@ -222,6 +222,13 @@ function buildExtraSectionParagraph(
   service: Service,
   family: ReturnType<typeof getServiceFamily>
 ): string[] {
+  if (service.slug === "drone-surveys") {
+    return [
+      "The cost of a drone survey depends on site size, level of detail, access and location, and the type of output needed such as images, mapping, or reports.",
+      "The cost of a drone survey depends on site size, level of detail, access and location, and the type of output needed such as images, mapping, or reports.",
+      "The cost of a drone survey depends on site size, level of detail, access and location, and the type of output needed such as images, mapping, or reports.",
+    ];
+  }
   const byFamily: Record<ReturnType<typeof getServiceFamily>, string[]> = {
     drains: [
       "Drainage cost and timing usually depend on drain condition, access to the affected run, and whether supporting repair or reinstatement is required alongside the core work.",
@@ -322,6 +329,7 @@ export function ServiceDetailContent({
   const rootSeoAttrs = pageSeoDataAttrs(pageTier, seoPageType);
   const hrefForService = servicePageHrefProp ?? getServiceUrl;
   const displayTitle = service.titleSingular ?? service.title;
+  const isDroneSurveysPage = service.slug === "drone-surveys";
   const serviceTypes = verticalConfig.serviceTypesBySlug?.[service.slug] ?? [];
   const industries = verticalConfig.industries ?? DEFAULT_INDUSTRIES;
   const trustedEquipment = verticalConfig.trustedEquipment ?? [];
@@ -340,7 +348,11 @@ export function ServiceDetailContent({
     sidebar: ["Request a quote"],
     actionHeading: [`Discuss your ${displayTitle.toLowerCase()} requirements`],
   };
-  const overviewDescriptionsExtended = [
+  const overviewDescriptionsExtended = isDroneSurveysPage
+    ? [
+        "Drone surveys use aerial imagery to map land, track sites and capture accurate visual data without the need for traditional access methods.",
+      ]
+    : [
     `${displayTitle} is typically needed when site conditions, programme pressure, or repeat issues make a clear technical route essential before work starts. The aim is a durable outcome with fewer surprises during delivery and after handover.`,
     `Teams commission ${displayTitle.toLowerCase()} when they need dependable performance, evidence-led decisions, and a delivery plan that fits real access and sequencing constraints.`,
     `Whether you are planning ahead or responding to an active issue, ${displayTitle.toLowerCase()} helps turn uncertainty into scoped work with predictable timing and clear next steps.`,
@@ -377,20 +389,25 @@ export function ServiceDetailContent({
   const mergedFaqs = [...faqs, ...(shouldAppendOneFaq ? generatedFaqs.slice(0, 1) : generatedFaqs.slice(0, 2))].slice(0, 5);
   const serviceFamily = getServiceFamily(service);
   const extraParagraph = buildExtraSectionParagraph(service, serviceFamily)[extraVariant];
-  const whenUsedParagraphs = [
-    [
-      "This service is commonly used when existing conditions create uncertainty around cost, scope, or programme and a clear technical route is needed before committing to work.",
-      "It is also commissioned during upgrades, refurbishments, and new-build stages where sequencing, access, and compliance requirements must be addressed early to avoid delays.",
-    ],
-    [
-      "Most clients request this service when recurring issues, changing site requirements, or planned development work make a straightforward fix unlikely without proper assessment.",
-      "It is particularly useful where project teams need clear options, documented next steps, and a delivery plan that aligns with other trades and milestones.",
-    ],
-    [
-      "Teams usually bring in this service when the priority is reliable outcomes over short-term patching, especially on sites where conditions can change quickly.",
-      "It is frequently part of broader project scopes involving planning, remedial work, or staged improvements where decisions need to be practical and evidence-led.",
-    ],
-  ][whenUsedVariant];
+  const whenUsedParagraphs = isDroneSurveysPage
+    ? [
+        "Drone surveys are useful when you need a clear view of land, buildings or sites without sending people on-site or setting up equipment.",
+        "Common situations include: checking land before planning or development, monitoring construction progress, reviewing large or hard-to-access areas, and capturing site conditions for reports or decisions.",
+      ]
+    : [
+        [
+          "This service is commonly used when existing conditions create uncertainty around cost, scope, or programme and a clear technical route is needed before committing to work.",
+          "It is also commissioned during upgrades, refurbishments, and new-build stages where sequencing, access, and compliance requirements must be addressed early to avoid delays.",
+        ],
+        [
+          "Most clients request this service when recurring issues, changing site requirements, or planned development work make a straightforward fix unlikely without proper assessment.",
+          "It is particularly useful where project teams need clear options, documented next steps, and a delivery plan that aligns with other trades and milestones.",
+        ],
+        [
+          "Teams usually bring in this service when the priority is reliable outcomes over short-term patching, especially on sites where conditions can change quickly.",
+          "It is frequently part of broader project scopes involving planning, remedial work, or staged improvements where decisions need to be practical and evidence-led.",
+        ],
+      ][whenUsedVariant];
   const overviewDescriptions = overviewDescriptionsExtended;
   const reassuranceCopy = [
     "Our approach focuses on selecting the right method based on site conditions and project requirements, then documenting each stage so decisions stay clear throughout delivery.",
@@ -403,13 +420,17 @@ export function ServiceDetailContent({
     serviceSlug: service.slug,
   });
   const actionHeading = ctaCopy.actionHeading[ctaVariant % ctaCopy.actionHeading.length];
-  const openingLeadCandidates = [
-    `In practice, that means balancing programme, cost certainty, and delivery constraints before site works begin, so decisions stay practical through to completion.`,
-    `Enquiries usually arrive when stakeholders need a clear route from symptoms or requirements through to implementation, without avoidable rework.`,
-    `Operational pressure or tight sequencing often makes a generic fix too risky; structured scope and delivery reduce that exposure.`,
-    `From first conversation to handover, the focus stays on what the site needs, what can be delivered safely, and how to avoid repeat issues after the main works finish.`,
-    `That usually translates into clearer procurement decisions: fewer assumptions, better-aligned trades, and a documented path if priorities change mid-programme.`,
-  ];
+  const openingLeadCandidates = isDroneSurveysPage
+    ? [
+        "Using drones allows faster capture, safer data collection and clear visual outputs that are easy to review and share.",
+      ]
+    : [
+        `In practice, that means balancing programme, cost certainty, and delivery constraints before site works begin, so decisions stay practical through to completion.`,
+        `Enquiries usually arrive when stakeholders need a clear route from symptoms or requirements through to implementation, without avoidable rework.`,
+        `Operational pressure or tight sequencing often makes a generic fix too risky; structured scope and delivery reduce that exposure.`,
+        `From first conversation to handover, the focus stays on what the site needs, what can be delivered safely, and how to avoid repeat issues after the main works finish.`,
+        `That usually translates into clearer procurement decisions: fewer assumptions, better-aligned trades, and a documented path if priorities change mid-programme.`,
+      ];
   const openingLeadIndex = getVariantIndex(`svc-opening-lead:${service.slug}`, openingLeadCandidates.length);
   const openingLead = openingLeadCandidates[openingLeadIndex];
   const earlyLocationLinks = buildFeaturedServiceLocationLinks({
@@ -437,7 +458,9 @@ export function ServiceDetailContent({
               <p className="font-medium">
                 Step {idx + 1}: {step}
               </p>
-              <p className="mt-1 text-sm text-muted-foreground">What this step delivers: {buildProcessOutcome(step)}</p>
+              {!isDroneSurveysPage && (
+                <p className="mt-1 text-sm text-muted-foreground">What this step delivers: {buildProcessOutcome(step)}</p>
+              )}
             </li>
           ))}
         </ol>
@@ -546,15 +569,20 @@ export function ServiceDetailContent({
                 </figure>
               )}
               <SectionIntro
-                title={`When you might need ${displayTitle}`}
-                description={typicalSituationsSection.description}
+                title={isDroneSurveysPage ? "When you might need a drone survey" : `When you might need ${displayTitle}`}
+                description={
+                  isDroneSurveysPage
+                    ? "Drone surveys are useful when you need a clear view of land, buildings or sites without complex access."
+                    : typicalSituationsSection.description
+                }
                 headingLevel="h2"
               />
               <div className="mb-8 space-y-4 text-muted-foreground">
                 <p>{whenUsedParagraphs[0]}</p>
                 <p>
-                  {whenUsedParagraphs[1]} At this stage, teams usually need clear commercial options before committing
-                  to delivery windows and budgets.
+                  {whenUsedParagraphs[1]}
+                  {!isDroneSurveysPage &&
+                    " At this stage, teams usually need clear commercial options before committing to delivery windows and budgets."}
                 </p>
                 {(() => {
                   const other = services.find((s) => s.slug !== service.slug);
@@ -603,7 +631,7 @@ export function ServiceDetailContent({
               {serviceTypes.length > 0 && (
                 <>
                   <SectionIntro
-                    title={`Where ${displayTitle} is used`}
+                    title={isDroneSurveysPage ? "Where Drone Surveys Fit" : `Where ${displayTitle} is used`}
                     description={
                       sectionIntros.types ??
                       "These grouped scenarios explain where this work is typically commissioned and why scope can differ by site and objective."

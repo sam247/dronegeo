@@ -13,23 +13,20 @@ export const services = [
     slug: "drone-surveys",
     title: "Drone Surveys",
     titleSingular: "Drone Survey",
-    shortDescription: "Fast aerial surveying for land, assets and active construction sites.",
+    shortDescription: "Fast aerial surveys for land, sites and construction projects.",
     description:
-      "Drone surveys provide high-resolution aerial capture for mapping, progress tracking and site understanding. They are ideal where speed, safety and broad coverage are priorities.",
+      "They are commonly used for land assessments, construction monitoring, planning support and site overviews.",
     benefits: [
-      "Covers large areas quickly with minimal disruption",
-      "Improves safety by reducing manual high-risk access",
-      "Provides visual evidence for planning and reporting",
-      "Supports progress tracking across project phases",
-      "Produces outputs suitable for client and contractor teams"
+      "Fast setup and turnaround",
+      "Minimal disruption to site",
+      "Clear, high-quality visuals",
+      "Simple outputs you can use immediately"
     ],
     process: [
-      "Confirm scope, site constraints and required outputs",
-      "Complete pre-flight checks and permissions review",
-      "Fly planned routes for full, repeatable coverage",
-      "Process imagery into mapped and inspection-ready outputs",
-      "Quality check files and annotate key findings",
-      "Deliver approved outputs and summary report"
+      "Define the site and requirements - We confirm what needs to be captured and how the data will be used.",
+      "Capture aerial data - We fly the site and collect images or video.",
+      "Process and review - We organise and prepare the data.",
+      "Deliver results - You receive clear visuals or outputs ready to use."
     ],
     icon: "Drone"
   },
@@ -134,7 +131,7 @@ export const testimonials = [
     company: "London"
   },
   {
-    quote: "We use Mainline Surveys for measured building and drone surveys across our development portfolio. Reliable data, clear pricing and no surprises on site.",
+    quote: "DroneGeo has been reliable across multiple inspections. Clear updates, fast turnaround and straightforward reporting.",
     author: "Sarah Mitchell",
     role: "Development Manager",
     company: "Surrey"
@@ -296,100 +293,16 @@ export const hubPages: HubData[] = [
   {
     category: "problems",
     basePath: "/survey-issues",
-    title: "When You Need a Survey",
-    subtitle: "Understand when to commission land and building surveys for planning, extensions and development.",
-    metaDescription: "When you need a topographical, measured building, utility or drone survey. Expert guidance for architects, developers and property owners."
-  },
-  {
-    category: "collapse",
-    basePath: "/survey-project-types",
-    title: "Survey Project Types",
-    subtitle: "Survey solutions for different project types — planning, extensions, development and construction.",
-    metaDescription: "Land and drone survey guides for planning applications, extensions, property development and construction. UK survey advice."
-  },
-  {
-    category: "costs",
-    basePath: "/survey-costs",
-    title: "Survey Cost Guides",
-    subtitle: "Typical UK pricing for topographical, measured building, utility and drone surveys.",
-    metaDescription: "How much do land and drone surveys cost in the UK? Price guides for topographical, measured building, utility and drone survey services."
-  },
-  {
-    category: "inspection",
-    basePath: "/survey-methods",
-    title: "Survey Types & Technology",
-    subtitle: "How land and drone surveys are carried out — equipment, methods and deliverables.",
-    metaDescription: "Survey technology and methods. Total stations, GNSS, laser scanning, GPR and drone surveys explained for UK construction and development."
-  },
-  {
-    category: "causes",
-    basePath: "/survey-technology",
-    title: "Survey Technology Guides",
-    subtitle: "Understanding survey equipment and techniques used by professional surveyors.",
-    metaDescription: "What is a total station, GNSS, LiDAR and GPR? Survey technology guides for architects and developers."
-  },
-  {
-    category: "commercial",
-    basePath: "/commercial-surveys",
-    title: "Commercial Survey Services",
-    subtitle: "Land and drone surveys for developers, commercial property and construction.",
-    metaDescription: "Topographical, measured building, utility and drone surveys for commercial and development projects across the UK."
-  },
-  {
-    category: "emergency",
-    basePath: "/emergency",
-    title: "Survey Enquiries",
-    subtitle: "Get a survey quote or speak with a survey specialist for your project.",
-    metaDescription: "Request a land or drone survey quote. Fast turnaround for planning, development and construction projects."
-  },
-  {
-    category: "repair-methods",
-    basePath: "/survey-deliverables",
-    title: "Survey Methods & Deliverables",
-    subtitle: "Compare survey types and understand which is right for your project.",
-    metaDescription: "Topographical vs measured building vs drone surveys. Method and deliverable guides for UK projects."
-  },
-  {
-    category: "property",
-    basePath: "/property-surveys",
-    title: "Property Survey Services",
-    subtitle: "Land and building surveys for homeowners, landlords and property developers.",
-    metaDescription: "Survey services for residential and commercial property. Planning, extension and development surveys across London and the South East."
-  },
-  {
-    category: "survey",
-    basePath: "/survey-services",
-    title: "Land & Drone Surveys",
-    subtitle: "Professional land and drone surveys for planning, development and construction.",
-    metaDescription: "Topographical, measured building, utility and drone surveys for architects, developers and property owners across the UK."
-  },
-  {
-    category: "property-types",
-    basePath: "/property-types",
-    title: "Survey by Project Type",
-    subtitle: "Survey guidance for extensions, new build, refurbishment and commercial projects.",
-    metaDescription: "Which survey for your project type? Guides for residential extensions, new build, refurbishment and commercial development."
-  },
-  {
-    category: "legal",
-    basePath: "/boundary-legal-surveys",
-    title: "Boundary & Legal Surveys",
-    subtitle: "Boundary surveys and survey responsibility for development and disputes.",
-    metaDescription: "Boundary surveys, party wall and development. When you need a survey for legal or boundary clarity."
-  },
-  {
-    category: "buyer",
-    basePath: "/homebuyer-surveys",
-    title: "Surveys for Property Purchase",
-    subtitle: "Survey advice for homebuyers and property investors.",
-    metaDescription: "Do you need a survey before buying? Land and building survey guides for property purchase and development."
+    title: "Drone Inspection Use Cases",
+    subtitle: "Common situations where drone surveys and inspections provide faster, safer property insights.",
+    metaDescription: "Drone roof inspections, building inspections, estate agent photography and solar thermal checks explained."
   },
   {
     category: "guides",
     basePath: "/survey-guides",
-    title: "Survey & Drone Survey Guides",
-    subtitle: "Guides for architects, developers and property owners on land surveys, drone surveys and planning.",
-    metaDescription: "Guides on topographical surveys, measured building surveys, drone surveys, utility mapping and survey costs. Expert advice for UK construction and development."
+    title: "Drone Service Guides",
+    subtitle: "Practical guidance for drone surveys, inspections, thermal imaging and aerial photography.",
+    metaDescription: "DroneGeo guides for roof inspections, thermal checks, aerial media and building survey workflows."
   }
 ];
 
@@ -397,7 +310,7 @@ export const problemPages: InfoPageData[] = [
   {
     slug: "signs-of-collapsed-drain",
     title: "Signs of a Collapsed Drain",
-    metaDescription: "How to tell if your drain has collapsed — warning signs, what to look for, and what to do next. Expert advice from Mainline Drains.",
+    metaDescription: "How to tell if your drain has collapsed — warning signs, what to look for, and what to do next. Expert advice from DroneGeo.",
     intro: "A collapsed drain can go undetected for weeks or even months, causing increasing damage to your property. Knowing the warning signs helps you act quickly and avoid costly repairs. Here's what to look for and when to call a drainage engineer.",
     signs: [
       "Slow-draining sinks, baths or toilets across the property",
@@ -453,7 +366,7 @@ export const problemPages: InfoPageData[] = [
   {
     slug: "recurring-drain-blockages",
     title: "Recurring Drain Blockages",
-    metaDescription: "Why your drains keep blocking and how to stop it for good. Expert diagnosis and permanent solutions from Mainline Drains.",
+    metaDescription: "Why your drains keep blocking and how to stop it for good. Expert diagnosis and permanent solutions from DroneGeo.",
     intro: "If your drains keep blocking despite being cleared, there's almost certainly an underlying structural problem. Repeated blockages are a symptom — not the disease. A proper investigation will reveal the root cause and allow us to fix it permanently.",
     signs: [
       "Blockages that return within weeks or months of clearing",
@@ -524,7 +437,7 @@ export const problemPages: InfoPageData[] = [
   {
     slug: "why-do-my-drains-smell",
     title: "Why Do My Drains Smell?",
-    metaDescription: "Why do my drains smell? Common causes of drain odours and when to call a professional. Expert advice from Mainline Drains.",
+    metaDescription: "Why do my drains smell? Common causes of drain odours and when to call a professional. Expert advice from DroneGeo.",
     intro: "If you're asking 'why do my drains smell?', you're not alone — it's one of the most common drainage complaints. Drain smells can range from mildly unpleasant to genuinely nauseating, and the cause can be anything from a dry trap to a collapsed pipe. Understanding why helps you decide whether it's a DIY fix or a job for a professional.",
     signs: [
       "Rotten egg or sewage smell from sinks, showers or toilets",
@@ -890,7 +803,7 @@ export const insurancePages: InfoPageData[] = [
   {
     slug: "collapsed-drain-insurance-claims",
     title: "Collapsed Drain Insurance Claims",
-    metaDescription: "How to claim on your home insurance for a collapsed drain. Step-by-step guide with expert advice from Mainline Drains.",
+    metaDescription: "How to claim on your home insurance for a collapsed drain. Step-by-step guide with expert advice from DroneGeo.",
     intro: "Many home insurance policies cover collapsed drain repairs, but navigating the claims process can be confusing. We help hundreds of customers every year with their drain insurance claims, providing the evidence and documentation insurers require.",
     signs: [
       "Your home insurance may cover drain collapse if the event is sudden",
@@ -1861,20 +1774,10 @@ export const categoryImages: Record<string, string> = {
 };
 
 /** First N guides listed on the main /survey-guides hub; remaining guides are partitioned across other topic hubs (disjoint slugs). */
-const GUIDE_HUB_MAIN_COUNT = 14;
+const GUIDE_HUB_MAIN_COUNT = 999;
 
 const GUIDE_SECONDARY_HUB_ORDER = [
-  "collapse",
-  "survey",
-  "inspection",
-  "causes",
-  "commercial",
-  "emergency",
-  "repair-methods",
-  "property",
-  "legal",
-  "buyer",
-  "property-types",
+  "guides",
 ] as const;
 
 /** Hub category that owns this guide slug under the partitioned guides model, or null if not a guide. */
@@ -1908,9 +1811,8 @@ const surveyProblemsAsInfoPages: InfoPageData[] = surveyProblemPages.map((p) => 
 
 // Helper to get all pages for a category (canonical topic families only)
 export const getCategoryPages = (category: string): InfoPageData[] => {
-  if (category === "costs") return costPages;
   if (category === "problems") return surveyProblemsAsInfoPages;
-  if (category === "guides") return guidesPages.slice(0, GUIDE_HUB_MAIN_COUNT);
+  if (category === "guides") return guidesPages;
   const rest = guidesPages.slice(GUIDE_HUB_MAIN_COUNT);
   const idx = GUIDE_SECONDARY_HUB_ORDER.indexOf(category as (typeof GUIDE_SECONDARY_HUB_ORDER)[number]);
   if (idx === -1) return [];
@@ -1922,17 +1824,10 @@ export const getHubData = (category: string): HubData | undefined => {
 };
 
 const SURVEYS_SERVICE_TO_TOPIC_CATEGORIES: Record<string, string[]> = {
-  "topographical-survey": ["survey", "inspection", "costs", "guides"],
-  "measured-building-survey": ["survey", "inspection", "costs", "property-types"],
-  "utility-survey": ["inspection", "survey", "costs"],
-  "utility-mapping-survey": ["inspection", "survey", "costs"],
-  "boundary-survey": ["legal", "survey", "guides"],
-  "laser-scanning-survey": ["inspection", "survey", "guides"],
-  "drone-survey": ["survey", "inspection", "guides", "costs"],
-  "drone-roof-inspection": ["inspection", "survey", "guides"],
-  "drone-building-inspection": ["inspection", "survey", "guides"],
-  "drone-topographical-survey": ["survey", "inspection", "costs"],
-  "drone-construction-survey": ["survey", "inspection", "guides"],
+  "drone-surveys": ["guides"],
+  "drone-inspections": ["guides"],
+  "thermal-drone-imaging": ["guides"],
+  "aerial-photography": ["guides"],
 };
 
 const MAX_TOPIC_LINKS = 6;
@@ -1975,63 +1870,32 @@ export const relatedGuideLinksByService: Record<string, { slug: string; path: st
 
 // Service detail page: FAQs per survey service slug
 export const serviceFaqsBySlug: Record<string, { question: string; answer: string }[]> = {
-  "topographical-survey": [
-    { question: "How much does a topographical survey cost?", answer: "Costs depend on site size and detail. Small residential plots typically range from around £600–£1,200 + VAT; larger sites £1,500–£4,000+. Our partners provide fixed quotes once scope is clear." },
-    { question: "How long does a topographical survey take?", answer: "On-site work is often one day for a typical dwelling plot; drawings are usually delivered within a few days to a week. Larger sites may need more time." },
-    { question: "Do I need a topographical survey for planning?", answer: "Most planning applications need an up-to-date topographical survey showing existing site levels and features. Your architect or planning consultant can confirm local requirements." },
+  "drone-surveys": [
+    { question: "What is a drone survey?", answer: "It is aerial capture of a site using drones to produce clear images, mapping and visual data." },
+    { question: "When should I use one?", answer: "Use it when you need a clear view of land, buildings or hard-to-access areas quickly and safely." },
+    { question: "What do I receive?", answer: "You receive clear visuals and outputs such as images, mapping or simple reports based on your brief." },
   ],
-  "measured-building-survey": [
-    { question: "How much does a measured building survey cost?", answer: "Costs depend on building size and deliverables. A typical house might be £800–£2,000 + VAT; larger or complex buildings more. We provide fixed quotes after a brief." },
-    { question: "What do I get from a measured building survey?", answer: "You receive accurate floor plans, elevations and sections in CAD (and optionally 3D/BIM). These form the base for design and planning." },
-    { question: "Do I need a measured building survey for an extension?", answer: "Yes, in most cases. It gives your architect reliable as-existing dimensions and reduces design risk and on-site surprises." },
+  "drone-inspections": [
+    { question: "Can drone inspections replace scaffolding?", answer: "For many first-pass inspections, yes. Drone capture gives high-level visibility before committing to full access equipment." },
+    { question: "Do you provide defect annotations?", answer: "Yes, we can tag and organise findings by elevation and area to support contractor scoping." },
   ],
-  "utility-survey": [
-    { question: "How much does a utility survey cost?", answer: "Typical UK utility surveys range from around £500–£1,500+ depending on site size and detection depth. Quotes are provided after reviewing your site and scope." },
-    { question: "When do I need a utility survey?", answer: "Before excavation, piling or groundworks. It reduces the risk of striking buried services and supports CDM and design." },
-    { question: "What does a utility survey show?", answer: "Locations of buried pipes, cables and ducts where detectable, with quality levels. It does not replace trial holes where absolute certainty is required." },
+  "thermal-drone-imaging": [
+    { question: "What can thermal drone imaging detect?", answer: "It highlights temperature anomalies like potential heat loss, moisture ingress, electrical hotspots, and underperforming solar panels." },
+    { question: "When should thermal surveys be flown?", answer: "Timing depends on weather and asset type. We schedule flights for suitable thermal contrast and reliable interpretation." },
   ],
-  "utility-mapping-survey": [
-    { question: "What is the difference between utility survey and utility mapping?", answer: "Utility mapping is a coordinated survey that ties all detected services to a single topographical grid, often with levels and attributes. It is used for design and development." },
-    { question: "Does utility mapping include drainage?", answer: "Yes. Drainage runs, manholes and outfalls can be included where visible or detectable. For internal pipe condition you need a drainage specialist." },
-  ],
-  "boundary-survey": [
-    { question: "When do I need a boundary survey?", answer: "When building near the boundary, resolving disputes, or preparing legal or Land Registry documents. It clarifies the position of the physical boundary." },
-    { question: "How much does a boundary survey cost?", answer: "Costs depend on complexity and whether it is standalone or part of a larger topographical survey. Your surveyor will quote after a brief." },
-  ],
-  "laser-scanning-survey": [
-    { question: "When should I use laser scanning instead of a traditional measured survey?", answer: "Laser scanning is ideal for complex geometry, heritage buildings, and when you need 3D point clouds for BIM or clash detection." },
-    { question: "What format do I get from a laser scan survey?", answer: "Point clouds and, typically, 2D/3D CAD or Revit outputs. Format and level of detail are agreed at briefing." },
-  ],
-  "drone-survey": [
-    { question: "How accurate are drone surveys?", answer: "With proper ground control, drone surveys can achieve construction-grade accuracy (often within 20–50mm) for many applications. Your surveyor will state accuracy and limitations." },
-    { question: "How much does a drone survey cost?", answer: "Costs depend on area and deliverables. Drone surveys often cost less than traditional methods for large, open sites. See our drone survey cost guide." },
-    { question: "When should I use a drone survey?", answer: "Ideal for large sites, roof inspections, progress monitoring and volume calculations. For small urban plots or fine internal detail, ground survey may be better." },
-  ],
-  "drone-roof-inspection": [
-    { question: "Do I need scaffolding for a roof survey?", answer: "No. Drone roof inspections capture high-resolution imagery without scaffolding or cherry pickers, reducing cost and disruption." },
-    { question: "What do you deliver from a drone roof inspection?", answer: "Imagery, video and, where required, annotated reports or condition assessments. Deliverables are agreed at briefing." },
-  ],
-  "drone-building-inspection": [
-    { question: "What is the difference between drone roof and building inspection?", answer: "Roof inspection focuses on roof condition. Building inspection can include façades, high-level details and external envelope, often for condition or design." },
-  ],
-  "drone-topographical-survey": [
-    { question: "When is a drone topographical survey better than a ground survey?", answer: "For large, open or hard-to-access sites, drone surveys can be faster and cheaper while still meeting design accuracy when properly controlled." },
-    { question: "What deliverables do I get?", answer: "Typically orthophotos, contours, digital terrain models and volume reports, in CAD or GIS formats as agreed." },
-  ],
-  "drone-construction-survey": [
-    { question: "How often can you fly a construction site?", answer: "As often as the programme requires. Many clients use repeat drone surveys for progress, volumes and as-built verification." },
-    { question: "Do drone surveys integrate with our grid?", answer: "Yes. Control is set out in your project grid so deliverables align with design and other surveys." },
+  "aerial-photography": [
+    { question: "Do you provide edited media?", answer: "Yes, we deliver edited stills and/or video suitable for web, listings and marketing channels." },
+    { question: "Can you work from a shot list?", answer: "Absolutely. We can capture to a predefined shot plan for estate agents, developers and campaign teams." },
   ],
 };
 
 // Guides index page: featured guides and near-me links (survey-focused). Icon keys mapped in component.
 export const guidesIndexFeatured: { title: string; description: string; href: string; iconKey: "BookOpen" | "HelpCircle" }[] = [
-  { title: "Survey Guides Overview", description: "When you need a survey, which type to choose, and how much it costs. Planning, development and construction.", href: "/guides", iconKey: "BookOpen" },
-  { title: "Do I Need a Land Survey?", description: "Not sure if you need a professional survey? Use our decision guide to find out based on your project.", href: "/do-i-need-a-land-survey", iconKey: "HelpCircle" },
-  { title: "Survey FAQ", description: "Answers to common questions about survey types, costs, planning and when to use drone or ground surveys.", href: "/faq", iconKey: "HelpCircle" },
+  { title: "Drone Guides Overview", description: "Drone inspections, thermal imaging and aerial photography guidance for practical property decisions.", href: "/guides", iconKey: "BookOpen" },
+  { title: "Drone FAQ", description: "Common questions on capture quality, turnaround, reporting and service suitability.", href: "/faq", iconKey: "HelpCircle" },
 ];
 
 export const guidesIndexNearMe = [
-  { title: "Topographical Survey Near Me", href: "/topographical-survey-near-me" },
+  { title: "Drone Services by Area", href: "/service-areas" },
   { title: "Coverage by region", href: "/service-areas" },
 ];

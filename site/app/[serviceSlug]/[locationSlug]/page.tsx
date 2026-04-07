@@ -1,7 +1,6 @@
 import { notFound, permanentRedirect } from "next/navigation";
 import { services, locations, getRelevantTopicsForService } from "@/lib/data";
-import { projects } from "@/data/projects";
-import { getHeroImage, getProjectImage } from "@/lib/images";
+import { getHeroImage } from "@/lib/images";
 import { verticalConfig } from "@/config";
 import {
   LocationPage,
@@ -242,18 +241,6 @@ export default async function LocationRoute({ params }: Props) {
         })
       : undefined;
 
-  const eligibleProjectIds = new Set([location.id, ...neighbourIds]);
-  const nearbyProjectsList = projects
-    .filter((p) => p.locationId && eligibleProjectIds.has(p.locationId))
-    .slice(0, 3)
-    .map((p, i) => ({
-      id: p.id,
-      title: p.title,
-      description: p.description,
-      image: getProjectImage(p, i),
-      url: `/projects/${p.slug}`,
-    }));
-
   const introParagraph =
     strikingDistanceTarget?.introOverride ??
     `We provide ${service.title} across ${location.name} and ${location.area}. Our survey partners deliver accurate, planning-ready data for residential and commercial projects, with free no-obligation quotes.`;
@@ -291,7 +278,7 @@ export default async function LocationRoute({ params }: Props) {
         contactPath="/contact"
         trustSectionTitle={`Trusted survey partners in ${location.name}`}
         trustPoints={trustPoints}
-        diagnosisGuidePath="/do-i-need-a-land-survey"
+        diagnosisGuidePath="/survey-guides"
         introParagraph={introParagraph}
         extraServiceLocationLinks={extraServiceLocationLinks}
         priorityLocalLinks={priorityLocalLinks}
@@ -299,7 +286,7 @@ export default async function LocationRoute({ params }: Props) {
         nearbyAreasDescription={`Compare our ${service.title} in nearby areas.`}
         neighbourLocationsForContext={neighbourLocationsForContext}
         locationContextParagraph={locationContextParagraph}
-        nearbyProjects={nearbyProjectsList.length > 0 ? nearbyProjectsList : undefined}
+        nearbyProjects={undefined}
         relatedTopicLinks={relatedTopicLinks.length > 0 ? relatedTopicLinks : undefined}
         callTrackVertical={verticalConfig.verticalId}
         ctaVariants={verticalConfig.ctaVariants}
