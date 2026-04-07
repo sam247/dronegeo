@@ -1,17 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin, Clock, Linkedin, Twitter, Facebook } from "lucide-react";
-import { companyInfo, services } from "@/lib/data";
+import { companyInfo, locations, services } from "@/lib/data";
 import { getServiceUrl } from "engine";
 
 const FOOTER_LOGO_WIDTH = 210;
-
-const AREA_LINKS = [
-  { label: "Hertfordshire", id: "hertfordshire" },
-  { label: "Bedfordshire", id: "bedfordshire" },
-  { label: "Buckinghamshire", id: "buckinghamshire" },
-  { label: "London", id: "london" },
-] as const;
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -20,9 +13,9 @@ const Footer = () => {
   return (
     <footer className="bg-charcoal pb-14 text-neutral-50">
       <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 md:gap-8">
+        <div className="grid grid-cols-1 gap-10 md:gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div>
             <div className="mb-4 flex items-center gap-2">
               <Image
                 src="/logo_white.svg"
@@ -62,25 +55,6 @@ const Footer = () => {
               <li>
                 <Link href="/services" className="text-sm font-medium text-neutral-300 transition-colors hover:text-white">
                   View All →
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Areas we cover */}
-          <div>
-            <h3 className="mb-4 font-display text-lg font-semibold">Areas we cover</h3>
-            <ul className="space-y-2">
-              {AREA_LINKS.map((area) => (
-                <li key={area.id}>
-                  <Link href={`/${primarySlug}/${area.id}`} className="text-sm text-neutral-300 transition-colors hover:text-white">
-                    {area.label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link href="/service-areas" className="text-sm font-medium text-neutral-300 transition-colors hover:text-white">
-                  All service areas →
                 </Link>
               </li>
             </ul>
@@ -128,6 +102,31 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* Areas we cover — horizontal strip (matches surveys vertical pattern) */}
+        <div className="mt-10 border-t border-white/10 pt-6">
+          <h4 className="mb-3 text-sm font-semibold text-white/60">Areas we cover</h4>
+          <ul className="m-0 flex list-none flex-wrap items-center gap-x-3 gap-y-1 p-0 sm:gap-x-6 sm:gap-y-2">
+            {locations.map((loc) => (
+              <li key={loc.id}>
+                <Link
+                  href={`/${primarySlug}/${loc.id}`}
+                  className="-mx-1 inline-flex min-h-[44px] items-center px-1 text-sm text-neutral-300 transition-colors hover:text-white sm:min-h-0 sm:py-0"
+                >
+                  {loc.name}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/service-areas"
+                className="-mx-1 inline-flex min-h-[44px] items-center px-1 text-sm font-medium text-neutral-200 transition-colors hover:text-white sm:min-h-0 sm:py-0"
+              >
+                All Areas →
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
 
