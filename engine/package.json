@@ -1,0 +1,48 @@
+{
+  "name": "engine",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./components": "./components/index.ts",
+    "./components/ui/button": "./components/ui/button.tsx",
+    "./components/NearMeLocationList": "./components/NearMeLocationList.tsx",
+    "./components/navigation/ResourcesMenu": "./components/navigation/ResourcesMenu.tsx",
+    "./components/navigation/resources-menu-utils": "./components/navigation/resources-menu-utils.ts",
+    "./data/locations": "./data/locations.ts",
+    "./data/uk-location-hierarchy": "./data/uk-location-hierarchy.ts",
+    "./data/key-location-ids": "./data/key-location-ids.ts",
+    "./data/mainline-group": "./data/mainline-group.ts",
+    "./schema": "./schema/index.ts",
+    "./tools": "./tools/index.ts",
+    "./utils": "./utils/index.ts",
+    "./types": "./types/index.ts",
+    "./validation": "./validation/index.ts",
+    "./lib/phone/handleCallClick": "./lib/phone/handleCallClick.ts",
+    "./lib/pageWeighting": "./lib/pageWeighting.ts"
+  },
+  "peerDependencies": {
+    "next": ">=14",
+    "react": "^18",
+    "react-dom": "^18",
+    "zod": ">=4"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "libphonenumber-js": "^1.11.15",
+    "validator": "^13.12.0",
+    "zod": "^4.3.6",
+    "lucide-react": "^0.577.0",
+    "tailwind-merge": "^3.5.0",
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/validator": "^13.12.0",
+    "typescript": "^5"
+  }
+}

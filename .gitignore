@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+site/node_modules/
+site/.next/
+site/out/
+local-lead-engine/

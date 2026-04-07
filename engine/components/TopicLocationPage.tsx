@@ -1,0 +1,344 @@
+import Link from "next/link";
+import { BreadcrumbNav } from "./BreadcrumbNav";
+import { Button } from "./ui/button";
+import { QuoteFormPrimaryCta } from "./QuoteFormPrimaryCta";
+import type { Location } from "../types";
+import { getVariantIndex } from "../lib/contentVariants";
+import { getPageTier, pageSeoDataAttrs, type PageType } from "../lib/pageWeighting";
+import { getCtaVariant } from "../utils/ctaVariants";
+
+export interface TopicLocationProcessStep {
+  title: string;
+  outcome: string;
+}
+
+export interface TopicLocationPageProps {
+  topicTitle: string;
+  topicSlug: string;
+  location: Location;
+  locationSlug: string;
+  topicHubPath: string;
+  contextualOpening: string;
+  whenNeeded: string;
+  workInvolves: string;
+  commonScenarios: string[];
+  costComplexity: string;
+  typicalUseCases: string[];
+  processStepsDetailed: TopicLocationProcessStep[];
+  bodyContextLine?: string;
+  servicesHeading: string;
+  servicesIntro: string;
+  serviceLinks: Array<{ slug: string; title: string }>;
+  primaryCtaText: string;
+  primaryCtaHref: string;
+  secondaryCtaText?: string;
+  secondaryCtaHref?: string;
+  contactPath?: string;
+  ctaVariants: readonly string[];
+  /** Service slug for CTA performance bias (e.g. primary service for this topic). */
+  quoteCtaBiasServiceSlug?: string | null;
+  /** Optional internal link count for page tiering (future crawl/analytics feed). */
+  inlinkCount?: number | null;
+}
+
+function clampItems(items: string[], max = 5): string[] {
+  return items.slice(0, max);
+}
+
+const LAYOUT_VARIANTS = ["A", "B", "C"] as const;
+
+const TL_H2_WHEN = [
+  "When you might need this",
+  "When you might need this",
+  "When you might need this",
+] as const;
+
+const TL_H2_WORK = [
+  "How the service works",
+  "How the service works",
+  "How the service works",
+] as const;
+
+const TL_H2_PROCESS = [
+  "How the service works",
+  "How the service works",
+  "How the service works",
+] as const;
+
+const TL_H2_SIGNS = [
+  "Signs you may need this",
+  "Signs you may need this",
+  "Signs you may need this",
+] as const;
+
+const TL_H2_COST = [
+  "What affects cost and scope",
+  "What affects cost and scope",
+  "What affects cost and scope",
+] as const;
+
+const TL_H2_USE_CASES = [
+  "Where this is used",
+  "Where this is used",
+  "Where this is used",
+] as const;
+
+export function TopicLocationPage({
+  topicTitle,
+  topicSlug,
+  location,
+  locationSlug,
+  topicHubPath,
+  contextualOpening,
+  whenNeeded,
+  workInvolves,
+  commonScenarios,
+  costComplexity,
+  typicalUseCases,
+  processStepsDetailed,
+  bodyContextLine,
+  servicesHeading,
+  servicesIntro,
+  serviceLinks,
+  primaryCtaText,
+  primaryCtaHref,
+  secondaryCtaText,
+  secondaryCtaHref,
+  contactPath = "/contact",
+  ctaVariants,
+  quoteCtaBiasServiceSlug = null,
+  inlinkCount,
+}: TopicLocationPageProps) {
+  const topicQuoteCtaSeed = `${topicSlug}-${locationSlug}`;
+  const topicQuoteCtaLabel = getCtaVariant(topicQuoteCtaSeed, ctaVariants, {
+    serviceSlug: quoteCtaBiasServiceSlug ?? undefined,
+  });
+  const seoPageType: PageType = "service_location";
+  const pageTier = getPageTier({ inlinks: inlinkCount ?? null, pageType: seoPageType });
+  const rootSeoAttrs = pageSeoDataAttrs(pageTier, seoPageType);
+  const layoutVariantIndex = getVariantIndex(`layout:topic-location:${topicSlug}:${locationSlug}`, LAYOUT_VARIANTS.length);
+  const layoutVariant = LAYOUT_VARIANTS[layoutVariantIndex];
+  const scenarioItems = clampItems(commonScenarios);
+  const useCaseItems = clampItems(typicalUseCases);
+  const processItems = processStepsDetailed.filter((s) => s.title?.trim()).slice(0, 5);
+  const workInvolvesEnriched =
+    scenarioItems.length === 1
+      ? `${workInvolves} A frequent early trigger in ${location.name}: ${scenarioItems[0]}.`
+      : workInvolves;
+  const scenarioItemsForList = scenarioItems.length >= 2 ? scenarioItems : [];
+  const useCaseItemsForList = useCaseItems.length >= 2 ? useCaseItems : [];
+  const costComplexityEnriched =
+    useCaseItems.length === 1
+      ? `${costComplexity} Example context in ${location.name}: ${useCaseItems[0]}.`
+      : costComplexity;
+  const topicCategory = topicHubPath.replace(/^\//, "").split("/")[0] || undefined;
+  const openingStructure = [
+    `Most enquiries for ${topicTitle.toLowerCase()} in ${location.name} involve active project scopes where decisions on delivery method and timing affect overall outcomes.`,
+    `Projects usually reach this stage when a practical issue becomes time-sensitive and teams need a clear, location-aware implementation route.`,
+    `The best outcomes usually come when ${topicTitle.toLowerCase()} is scoped early enough to align risk, budget, and programme constraints.`,
+  ][layoutVariantIndex];
+
+  const h2Seed = `topic-loc-h2:${topicSlug}:${locationSlug}`;
+  const h2When = TL_H2_WHEN[getVariantIndex(`${h2Seed}:when`, TL_H2_WHEN.length)];
+  const h2Work = TL_H2_WORK[getVariantIndex(`${h2Seed}:work`, TL_H2_WORK.length)];
+  const h2ProcessTitle = TL_H2_PROCESS[getVariantIndex(`${h2Seed}:process`, TL_H2_PROCESS.length)];
+  const h2Signs = TL_H2_SIGNS[getVariantIndex(`${h2Seed}:signs`, TL_H2_SIGNS.length)];
+  const h2Cost = TL_H2_COST[getVariantIndex(`${h2Seed}:cost`, TL_H2_COST.length)];
+  const h2UseCases = TL_H2_USE_CASES[getVariantIndex(`${h2Seed}:use`, TL_H2_USE_CASES.length)];
+
+  const firstServiceLink = serviceLinks[0];
+
+  const whenNeededSection = (
+    <section className="mb-8">
+      <h2 className="mb-3 font-display text-xl font-semibold">{h2When}</h2>
+      <p className="max-w-3xl text-muted-foreground">{whenNeeded}</p>
+    </section>
+  );
+
+  const workInvolvesSection = (
+    <section className="mb-8">
+      <h2 className="mb-3 font-display text-xl font-semibold">{h2Work}</h2>
+      <p className="max-w-3xl text-muted-foreground">{workInvolvesEnriched}</p>
+    </section>
+  );
+
+  const processSection =
+    processItems.length > 0 ? (
+      <section className="mb-8">
+        <h2 className="mb-3 font-display text-xl font-semibold">{h2ProcessTitle}</h2>
+        <p className="mb-3 max-w-3xl text-muted-foreground">
+          We keep delivery structured so decisions, dependencies, and handover remain clear from start to finish.
+        </p>
+        <ol className="space-y-3">
+          {processItems.map((step, idx) => (
+            <li key={`${step.title}-${idx}`} className="rounded-lg border border-border bg-secondary/40 p-4">
+              <p className="font-medium">
+                Step {idx + 1}: {step.title}
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">What this step delivers: {step.outcome}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ) : null;
+
+  if (process.env.NODE_ENV !== "production") {
+    const estimatedOpeningWords = `${contextualOpening} ${openingStructure}`.trim().split(/\s+/).length;
+    const estimatedPrimarySections = 7;
+    if (estimatedOpeningWords < 45 || estimatedPrimarySections > 7) {
+      console.warn("[page-quality-warning]", {
+        pageType: "topic-location",
+        variant: layoutVariant,
+        topicSlug,
+        locationSlug,
+        estimatedOpeningWords,
+        estimatedPrimarySections,
+      });
+    }
+  }
+
+  return (
+    <main
+      className="container mx-auto px-4 py-8"
+      {...rootSeoAttrs}
+      data-layout-variant={layoutVariant}
+      data-topic-category={topicCategory}
+    >
+      <BreadcrumbNav
+        items={[
+          { name: "Home", url: "/" },
+          { name: topicTitle, url: topicHubPath },
+          { name: `${topicTitle} in ${location.name}`, url: `/${topicSlug}/${locationSlug}` },
+        ]}
+      />
+
+      <h1 className="mb-4 font-display text-3xl font-bold">
+        {topicTitle} in {location.name}
+      </h1>
+
+      <section className="mb-8 max-w-3xl space-y-3">
+        <p className="text-muted-foreground">{contextualOpening}</p>
+        <p className="text-muted-foreground">
+          {openingStructure}{" "}
+          For wider planning context, see the{" "}
+          <Link href={topicHubPath} className="text-primary hover:underline">
+            full {topicTitle.toLowerCase()} guide
+          </Link>
+          {firstServiceLink ? (
+            <>
+              , or explore{" "}
+              <Link
+                href={`/${firstServiceLink.slug}/${locationSlug}`}
+                className="text-primary hover:underline"
+              >
+                {firstServiceLink.title} in {location.name}
+              </Link>
+            </>
+          ) : null}
+          .
+        </p>
+      </section>
+
+      {layoutVariant === "B" ? (
+        <>
+          {whenNeededSection}
+          {workInvolvesSection}
+        </>
+      ) : (
+        <>
+          {workInvolvesSection}
+          {whenNeededSection}
+        </>
+      )}
+      {layoutVariant === "C" && processSection}
+
+      {scenarioItemsForList.length >= 2 ? (
+        <section className="mb-8">
+          <h2 className="mb-3 font-display text-xl font-semibold">{h2Signs}</h2>
+          <p className="mb-3 max-w-3xl text-muted-foreground">
+            These are typical triggers we see across {location.name} and {location.area} before teams move to
+            implementation.
+          </p>
+          <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
+            {scenarioItemsForList.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <section className="mb-8">
+        <h2 className="mb-3 font-display text-xl font-semibold">{h2Cost}</h2>
+        <p className="max-w-3xl text-muted-foreground">{costComplexityEnriched}</p>
+      </section>
+
+      {useCaseItemsForList.length >= 2 ? (
+        <section className="mb-8">
+          <h2 className="mb-3 font-display text-xl font-semibold">{h2UseCases}</h2>
+          <p className="mb-3 max-w-3xl text-muted-foreground">
+            Scope varies by building type, programme pressure, and operational constraints, so early planning usually
+            improves delivery quality and speed.
+          </p>
+          <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
+            {useCaseItemsForList.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {layoutVariant !== "C" && processSection}
+
+      {bodyContextLine && (
+        <section className="mb-8">
+          <p className="max-w-3xl text-muted-foreground">{bodyContextLine}</p>
+        </section>
+      )}
+
+      <section className="mb-8 flex flex-wrap gap-4">
+        <Link href={primaryCtaHref}>
+          <Button>{primaryCtaText}</Button>
+        </Link>
+        {secondaryCtaText && secondaryCtaHref && (
+          <Link href={secondaryCtaHref}>
+            <Button variant="outline">{secondaryCtaText}</Button>
+          </Link>
+        )}
+      </section>
+
+      <section className="border-t pt-8">
+        <h2 className="mb-4 font-display text-2xl font-bold">
+          {servicesHeading} in {location.name}
+        </h2>
+        <p className="mb-4 text-muted-foreground">{servicesIntro}</p>
+        <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          {serviceLinks.map((service) => (
+            <li key={service.slug}>
+              <Link href={`/${service.slug}/${locationSlug}`} className="text-primary hover:underline">
+                {service.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-8">
+        <p className="text-muted-foreground">
+          <Link href={topicHubPath} className="text-primary hover:underline">
+            View full {topicTitle.toLowerCase()} guide
+          </Link>{" "}
+          for wider planning context, or{" "}
+          <QuoteFormPrimaryCta
+            contactPath={contactPath}
+            linkClassName="text-primary hover:underline"
+            ctaText={topicQuoteCtaLabel}
+            ctaSeed={topicQuoteCtaSeed}
+          >
+            {topicQuoteCtaLabel}
+          </QuoteFormPrimaryCta>
+          .
+        </p>
+      </section>
+    </main>
+  );
+}
