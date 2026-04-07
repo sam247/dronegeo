@@ -12,20 +12,20 @@ const CTABanner = () => {
   const ctaLabel = "Get a quote";
 
   return (
-    <section className="py-16 md:py-20 bg-secondary text-primary">
+    <section className="bg-highlight py-12 text-white md:py-20">
       <div className="container">
         <div className="mx-auto max-w-3xl space-y-3 text-center">
-          <h2 className="font-display text-3xl font-bold md:text-4xl text-primary">
+          <h2 className="font-display text-3xl font-bold text-white md:text-4xl">
             Get a drone inspection quote
           </h2>
-          <p className="text-lg text-primary/90">Fast response. No obligation.</p>
+          <p className="text-lg text-white/90">Fast response. No obligation.</p>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <QuoteFormPrimaryCta
               contactPath="/contact"
               size="lg"
-              variant="highlight"
-              className="text-base"
+              variant="outline"
+              className="border-0 bg-white text-base font-semibold text-neutral-950 shadow-sm hover:bg-white/90 hover:text-neutral-950 focus-visible:ring-white/50"
               ctaText={ctaLabel}
               ctaSeed={ctaSeed}
             >
