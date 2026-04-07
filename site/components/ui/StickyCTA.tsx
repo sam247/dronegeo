@@ -3,8 +3,8 @@
 import type { MouseEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowRight } from "lucide-react";
-import { digitsFromPhone, handleCallClick, QuoteFormPrimaryCta, getCtaVariant, inferServiceSlugForCtaBias } from "engine";
-import { companyInfo, services } from "@/lib/data";
+import { digitsFromPhone, handleCallClick, QuoteFormPrimaryCta } from "engine";
+import { companyInfo } from "@/lib/data";
 import { verticalConfig } from "@/config";
 import { usePathname } from "next/navigation";
 import { useSelectedIssue } from "@/components/context/SelectedIssueContext";
@@ -16,9 +16,7 @@ export function StickyCTA({ defaultText, issueMap, ctaPrimary }: StickyCtaConfig
   const verticalId = verticalConfig.verticalId;
   const page_path = pathname && pathname.length > 0 ? pathname : "/";
   const formCtaSeed = `${verticalId}-${page_path}`;
-  const formCtaLabel = getCtaVariant(formCtaSeed, verticalConfig.ctaVariants, {
-    serviceSlug: inferServiceSlugForCtaBias(pathname, services),
-  });
+  const formCtaLabel = "Get A Quote";
 
   const displayText =
     selectedIssue && issueMap?.[selectedIssue] ? issueMap[selectedIssue] : defaultText;
@@ -74,7 +72,7 @@ export function StickyCTA({ defaultText, issueMap, ctaPrimary }: StickyCtaConfig
             contactPath="/contact"
             variant="default"
             size="default"
-            className="min-w-0 flex-1 gap-2 sm:flex-none"
+            className="min-w-0 !h-11 flex-1 gap-2 sm:flex-none"
             ctaText={formCtaLabel}
             ctaSeed={formCtaSeed}
             onBeforeNavigate={onFormClick}

@@ -6,7 +6,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { services } from "@/lib/data";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -20,8 +19,6 @@ import {
   isServiceHubPath,
   TrackablePhoneLink,
   QuoteFormPrimaryCta,
-  getCtaVariant,
-  inferServiceSlugForCtaBias,
 } from "engine";
 import { verticalConfig } from "@/config";
 import { stickyCtaConfig } from "@/lib/stickyCtaConfig";
@@ -35,9 +32,7 @@ const Header = () => {
   const pathname = usePathname();
 
   const headerQuoteSeed = `${verticalConfig.verticalId}-header-${pathname && pathname.length > 0 ? pathname : "/"}`;
-  const headerQuoteLabel = getCtaVariant(headerQuoteSeed, verticalConfig.ctaVariants, {
-    serviceSlug: inferServiceSlugForCtaBias(pathname, services),
-  });
+  const headerQuoteLabel = "Get A Quote";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -126,6 +121,7 @@ const Header = () => {
             contactPath="/contact"
             variant="default"
             size="default"
+            className="!h-11"
             ctaText={headerQuoteLabel}
             ctaSeed={headerQuoteSeed}
           >
@@ -207,7 +203,7 @@ const Header = () => {
                   serviceSlug={null}
                   locationSlug={null}
                   source="header"
-                  className="inline-flex min-h-[48px] items-center justify-center gap-2 font-semibold"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2 font-semibold"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Phone className="h-4 w-4 shrink-0" aria-hidden />
@@ -218,7 +214,7 @@ const Header = () => {
                 contactPath="/contact"
                 variant="default"
                 size="default"
-                className="w-full"
+                className="w-full !h-11"
                 ctaText={headerQuoteLabel}
                 ctaSeed={headerQuoteSeed}
                 onAfterNavigate={() => setMobileMenuOpen(false)}
