@@ -1,7 +1,7 @@
-import { Briefcase, Check, Shield } from "lucide-react";
+import { Award, Briefcase, Check, Shield, Star } from "lucide-react";
 import { cn } from "../utils/cn";
 
-export type TrustStripIcon = "check" | "shield" | "briefcase";
+export type TrustStripIcon = "check" | "shield" | "briefcase" | "award" | "star";
 
 export interface TrustStripItem {
   label: string;
@@ -9,15 +9,18 @@ export interface TrustStripItem {
 }
 
 const DEFAULT_ITEMS: TrustStripItem[] = [
-  { label: "Vetted contractors", icon: "check" },
-  { label: "Fully insured", icon: "shield" },
+  { label: "Fully Insured", icon: "shield" },
+  { label: "A2CofC Licensed", icon: "award" },
   { label: "Commercial & site work specialists", icon: "briefcase" },
+  { label: "5 Star Rated", icon: "star" },
 ];
 
 const ICONS: Record<TrustStripIcon, typeof Check> = {
   check: Check,
   shield: Shield,
   briefcase: Briefcase,
+  award: Award,
+  star: Star,
 };
 
 export interface TrustStripProps {
