@@ -7,6 +7,7 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 const PRIMARY_SERVICE_SLUG = "drone-surveys";
+const CORE_AREA_IDS = new Set(["london", "hertfordshire", "bedfordshire", "buckinghamshire"]);
 
 export const metadata: Metadata = {
   title: "Service Areas | DroneGeo",
@@ -17,10 +18,11 @@ export const metadata: Metadata = {
 
 export default async function ServiceAreasPage() {
   const hero = await firstStockImage("drone uk aerial survey regions", 1);
+  const coreLocations = locations.filter((loc) => CORE_AREA_IDS.has(loc.id));
   return (
     <ServiceAreasHub
       primaryServiceSlug={PRIMARY_SERVICE_SLUG}
-      locations={locations}
+      locations={coreLocations}
       heroImageSrc={hero?.src}
       heroTitle="Drone Services Across Core Coverage Areas"
       heroSubtitle="Drone surveys, inspections, thermal imaging and aerial photography in Hertfordshire, London, Buckinghamshire and Bedfordshire."
