@@ -11,7 +11,7 @@ const Footer = () => {
   const primarySlug = "drone-surveys";
 
   return (
-    <footer className="bg-charcoal pb-[calc(6.5rem+env(safe-area-inset-bottom))] text-neutral-50 md:pb-14">
+    <footer className="bg-charcoal pb-[calc(5rem+env(safe-area-inset-bottom))] text-neutral-50">
       <div className="container py-12 md:py-16">
         <div className="grid grid-cols-1 gap-10 md:gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}

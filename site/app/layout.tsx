@@ -50,7 +50,7 @@ export default function RootLayout({
           <ScrollToTop />
           <SelectedIssueProvider>
             <Header />
-            <main className="flex-1 pb-0 md:pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-[calc(4.5rem+env(safe-area-inset-bottom))]">
+            <main className="flex-1">
               {children}
             </main>
             <Footer />
