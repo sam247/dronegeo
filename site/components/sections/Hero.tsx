@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowRight, ArrowLeft, FileCheck, Home, Map, Camera, Search } from "lucide-react";
-import { heroBg, heroBgVideo } from "@/lib/images";
+import { heroBgVideo } from "@/lib/images";
 import { verticalConfig } from "@/config";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -98,6 +98,8 @@ function buildHeroLeadSchema() {
 
 const Hero = () => {
   const heroVideoSrc = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || heroBgVideo;
+  const videoReadyRef = useRef(false);
+  const [videoVisible, setVideoVisible] = useState(false);
   const aboutLabelIndex = getVariantIndex(`about:home:${verticalConfig.verticalId}`, HERO_ABOUT_LABELS.length);
   const homeCtaSeed = `${verticalConfig.verticalId}-home`;
   const homeCtaLabel = "Get a quote";
@@ -117,6 +119,12 @@ const Hero = () => {
       // ignore
     }
   }, []);
+
+  const markVideoReady = () => {
+    if (videoReadyRef.current) return;
+    videoReadyRef.current = true;
+    setVideoVisible(true);
+  };
 
   const getPathMetadata = () => {
     const pagePath = window.location.pathname || "";
@@ -230,14 +238,27 @@ const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-primary py-16 md:py-24 lg:py-28">
       <div className="absolute inset-0">
+        {/* No static photo poster — gradient until first video frame is ready */}
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary))] via-[hsl(var(--primary))] to-[hsl(var(--highlight))]/35"
+          aria-hidden
+        />
         <video
-          className="h-full w-full object-cover opacity-30"
+          className={cn(
+            "absolute inset-0 h-full w-full object-cover opacity-30 transition-opacity duration-700 ease-out",
+            videoVisible ? "opacity-30" : "opacity-0"
+          )}
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
-          poster={heroBg}
+          preload="auto"
+          onLoadedData={markVideoReady}
+          onCanPlay={markVideoReady}
+          onPlaying={markVideoReady}
+          onError={() => {
+            /* Keep CSS-only gradient if video fails */
+          }}
         >
           <source src={heroVideoSrc} type="video/mp4" />
         </video>

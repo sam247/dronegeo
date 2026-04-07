@@ -12,6 +12,8 @@ export type TrackablePhoneLinkProps = Omit<ComponentPropsWithoutRef<"a">, "href"
   /** When set (e.g. static near-me path), used instead of `usePathname()` */
   pagePath?: string;
   source?: "cta" | "header" | "footer" | "inline";
+  /** Runs before call tracking; use for UI side effects (e.g. close mobile menu). */
+  onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
   context?: {
     service?: string | null;
     location?: string | null;
@@ -30,6 +32,7 @@ export function TrackablePhoneLink({
   pagePath: pagePathProp,
   source = "inline",
   context: optionalContext,
+  onClick: onClickProp,
   children,
   ...rest
 }: TrackablePhoneLinkProps) {
@@ -60,7 +63,10 @@ export function TrackablePhoneLink({
     <a
       href={href}
       {...rest}
-      onClick={(e: MouseEvent<HTMLAnchorElement>) => handleCallClick(e, digits, context)}
+      onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+        onClickProp?.(e);
+        handleCallClick(e, digits, context);
+      }}
     >
       {children}
     </a>

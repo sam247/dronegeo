@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/data";
 import {
@@ -24,6 +24,7 @@ import {
   inferServiceSlugForCtaBias,
 } from "engine";
 import { verticalConfig } from "@/config";
+import { stickyCtaConfig } from "@/lib/stickyCtaConfig";
 import { cn } from "@/lib/utils";
 
 const HEADER_LOGO_WIDTH = 210;
@@ -106,37 +107,60 @@ const Header = () => {
 
         </nav>
 
-        {/* CTA Button */}
-        <div className="hidden items-center gap-4 lg:flex">
-          <TrackablePhoneLink
-            phone={verticalConfig.companyInfo.phone}
-            vertical={verticalConfig.verticalId}
-            serviceSlug={null}
-            locationSlug={null}
-            className="flex items-center gap-2 text-sm font-medium text-primary"
-          >
-            <Phone className="h-4 w-4" />
-            Call Now
-          </TrackablePhoneLink>
+        {/* Desktop CTAs — match sticky bar: green Call + dark quote CTA */}
+        <div className="hidden items-center gap-2 lg:flex">
+          <Button variant="highlight" size="default" asChild className="shrink-0 gap-2">
+            <TrackablePhoneLink
+              phone={verticalConfig.companyInfo.phone}
+              vertical={verticalConfig.verticalId}
+              serviceSlug={null}
+              locationSlug={null}
+              source="header"
+              className="inline-flex min-h-[44px] items-center justify-center px-4 py-2 text-sm font-semibold"
+            >
+              <Phone className="h-4 w-4 shrink-0" aria-hidden />
+              {stickyCtaConfig.ctaPrimary}
+            </TrackablePhoneLink>
+          </Button>
           <QuoteFormPrimaryCta
             contactPath="/contact"
-            variant="highlight"
+            variant="default"
             size="default"
             ctaText={headerQuoteLabel}
             ctaSeed={headerQuoteSeed}
           >
-            {headerQuoteLabel}
+            <span className="inline-flex items-center gap-2">
+              {headerQuoteLabel}
+              <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+            </span>
           </QuoteFormPrimaryCta>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="flex min-h-[44px] min-w-[44px] items-center justify-center lg:hidden"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        {/* Mobile: green Call (same as sticky bar) + menu */}
+        <div className="flex shrink-0 items-center gap-2 lg:hidden">
+          <Button variant="highlight" size="sm" asChild className="gap-1.5 px-3">
+            <TrackablePhoneLink
+              phone={verticalConfig.companyInfo.phone}
+              vertical={verticalConfig.verticalId}
+              serviceSlug={null}
+              locationSlug={null}
+              source="header"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 text-xs font-semibold sm:text-sm"
+            >
+              <Phone className="h-4 w-4 shrink-0" aria-hidden />
+              <span className="max-w-[5.5rem] truncate sm:max-w-none">{stickyCtaConfig.ctaPrimary}</span>
+            </TrackablePhoneLink>
+          </Button>
+          <button
+            type="button"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md border border-border bg-background"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -176,26 +200,33 @@ const Header = () => {
             
 
             <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4">
-              <TrackablePhoneLink
-                phone={verticalConfig.companyInfo.phone}
-                vertical={verticalConfig.verticalId}
-                serviceSlug={null}
-                locationSlug={null}
-                className="flex items-center gap-2 text-sm font-medium text-primary"
-              >
-                <Phone className="h-4 w-4" />
-                Call Now
-              </TrackablePhoneLink>
+              <Button variant="highlight" asChild className="w-full">
+                <TrackablePhoneLink
+                  phone={verticalConfig.companyInfo.phone}
+                  vertical={verticalConfig.verticalId}
+                  serviceSlug={null}
+                  locationSlug={null}
+                  source="header"
+                  className="inline-flex min-h-[48px] items-center justify-center gap-2 font-semibold"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Phone className="h-4 w-4 shrink-0" aria-hidden />
+                  {stickyCtaConfig.ctaPrimary}
+                </TrackablePhoneLink>
+              </Button>
               <QuoteFormPrimaryCta
                 contactPath="/contact"
-                variant="highlight"
+                variant="default"
                 size="default"
                 className="w-full"
                 ctaText={headerQuoteLabel}
                 ctaSeed={headerQuoteSeed}
                 onAfterNavigate={() => setMobileMenuOpen(false)}
               >
-                {headerQuoteLabel}
+                <span className="inline-flex items-center justify-center gap-2">
+                  {headerQuoteLabel}
+                  <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                </span>
               </QuoteFormPrimaryCta>
             </div>
           </nav>

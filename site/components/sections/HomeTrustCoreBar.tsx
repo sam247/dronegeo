@@ -1,10 +1,10 @@
-import { Briefcase, Check, Shield, Zap } from "lucide-react";
+import { Award, Briefcase, Shield, Star } from "lucide-react";
 
 const TRUST_ITEMS = [
-  { label: "Vetted contractors", icon: Check },
-  { label: "Fully insured", icon: Shield },
+  { label: "Fully Insured", icon: Shield },
+  { label: "A2CofC Licensed", icon: Award },
   { label: "Commercial & site work specialists", icon: Briefcase },
-  { label: "Fast response from local contractors", icon: Zap },
+  { label: "5 Star Rated", icon: Star },
 ] as const;
 
 /** Lightweight trust row directly under the homepage hero (four items). */
@@ -23,25 +23,6 @@ export function HomeTrustCoreBar() {
             </li>
           ))}
         </ul>
-        <div
-          className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
-          aria-label="Accreditation marks"
-        >
-          <img
-            src="/trustmark.png"
-            alt="TrustMark"
-            width={88}
-            height={28}
-            className="h-6 w-auto max-w-[88px] object-contain"
-          />
-          <img
-            src="/fmb.png"
-            alt="Federation of Master Builders"
-            width={88}
-            height={28}
-            className="h-6 w-auto max-w-[88px] object-contain"
-          />
-        </div>
       </div>
     </section>
   );
